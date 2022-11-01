@@ -1,0 +1,36 @@
+-- carrotmatcat_comment 댓글 테이블 생성
+CREATE TABLE carrotmatcat_comment(
+	comment_no NUMBER PRIMARY KEY,
+	comment_content CLOB NOT NULL,
+	comment_time_posted DATE NOT NULL,
+	article_no NUMBER NOT NULL,
+	member_id VARCHAR2(100) NOT NULL,
+	CONSTRAINT comment_article_no_fk FOREIGN KEY(article_no) REFERENCES carrotmatcat_board(article_no),
+	CONSTRAINT comment_member_id_fk FOREIGN KEY(member_id) REFERENCES carrotmatcat_member(member_id)
+)
+
+CREATE SEQUENCE carrotmatcat_comment_seq;
+DROP SEQUENCE carrotmatcat_comment_seq;
+
+-- 댓글 등록
+INSERT INTO carrotmatcat_comment(comment_no, comment_content, comment_time_posted, article_no, member_id)
+VALUES(carrotmatcat_comment_seq.nextval, '공감합니다', SYSDATE, 1, 'chaeeunseo');
+
+INSERT INTO carrotmatcat_comment(comment_no, comment_content, comment_time_posted, article_no, member_id)
+VALUES(carrotmatcat_comment_seq.nextval, '맛있겠어요', SYSDATE, 2, 'hasense9410');
+
+commit
+
+SELECT * FROM carrotmatcat_comment
+
+-- 댓글 보여줄때 조회
+SELECT cm.member_nickname, cc.comment_content, TO_CHAR(cc.comment_time_posted,'YYYY.MM.DD HH:MM')
+FROM carrotmatcat_comment  cc
+INNER JOIN carrotmatcat_member cm ON cc.member_id = cm.member_id;
+
+--댓글 삭제
+DELETE FROM carrotmatcat_comment WHERE comment_no=?
+
+-- 댓글 수정
+UPDATE carrotmatcat_comment SET comment_content='공감하지않습니다' WHERE comment_no=1;
+
