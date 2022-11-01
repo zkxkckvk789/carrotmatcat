@@ -1,4 +1,4 @@
-package org.kosta.controller;
+package org.kosta.carrotmatcat.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
