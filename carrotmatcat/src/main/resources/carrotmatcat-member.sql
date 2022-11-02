@@ -29,5 +29,17 @@ UPDATE carrotmatcat_member SET member_nickname=?, member_password=? WHERE member
 DELETE FROM carrotmatcat_member WHERE member_id='yerin0110';
 DELETE FROM carrotmatcat_member WHERE member_id=?;
 
+--login
+SELECT member_id,member_nickname FROM carrotmatcat_member WHERE member_id='yerin0110' AND member_password='9697';
+SELECT member_id,member_nickname FROM carrotmatcat_member WHERE member_id=? AND member_password=?;
+
+--checkDuplicateId
+SELECT COUNT(*) FROM carrotmatcat_member WHERE member_id='yerin0110';
+SELECT COUNT(*) FROM carrotmatcat_member WHERE member_id=?;
+
+--checkDuplicateNickname
+SELECT COUNT(*) FROM carrotmatcat_member WHERE member_nickname='예린공주';
+SELECT COUNT(*) FROM carrotmatcat_member WHERE member_nickname=?
+
 COMMIT;
 SELECT * FROM carrotmatcat_member;

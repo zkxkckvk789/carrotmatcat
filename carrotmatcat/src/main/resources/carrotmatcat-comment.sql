@@ -24,9 +24,11 @@ commit
 SELECT * FROM carrotmatcat_comment
 
 -- 댓글 보여줄때 조회
-SELECT cm.member_nickname, cc.comment_content, TO_CHAR(cc.comment_time_posted,'YYYY.MM.DD HH:MM')
+SELECT cc.comment_no,cm.member_nickname, cc.comment_content, TO_CHAR(cc.comment_time_posted,'YYYY.MM.DD HH:MM') AS comment_time_posted
 FROM carrotmatcat_comment  cc
-INNER JOIN carrotmatcat_member cm ON cc.member_id = cm.member_id;
+INNER JOIN carrotmatcat_member cm ON cc.member_id = cm.member_id
+INNER JOIN carrotmatcat_board cb ON cb.article_no = cc.article_no
+WHERE cc.article_no='1';
 
 --댓글 삭제
 DELETE FROM carrotmatcat_comment WHERE comment_no=?

@@ -31,11 +31,16 @@ public class CommentVO {
 		this.postVO = postVO;
 	}
 	
+	//댓글 수정시 사용할 생성자
+	public CommentVO(long commentNo, String commentContent) {
+		super();
+		this.commentNo = commentNo;
+		this.commentContent = commentContent;
+	}
 	
 	public String getCommentTimePosted() {
 		return commentTimePosted;
 	}
-
 
 	public void setCommentTimePosted(String commentTimePosted) {
 		this.commentTimePosted = commentTimePosted;

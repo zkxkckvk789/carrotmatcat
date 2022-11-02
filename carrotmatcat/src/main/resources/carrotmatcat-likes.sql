@@ -6,9 +6,11 @@ CREATE TABLE carrotmatcat_likes(
     CONSTRAINT carrotmatcat_likes_pk PRIMARY KEY (article_no, member_id)
 )
 
+-- 좋아요 추가
 INSERT INTO carrotmatcat_likes VALUES(1, 'yerin0110');
 
-<<<<<<< HEAD
-=======
+-- 좋아요 삭제
+DELETE FROM carrotmatcat_likes WHERE article_no='1' AND member_id='javaking';
+
 SELECT * FROM carrotmatcat_likes;
->>>>>>> refs/heads/model-VO-ces1102
+
