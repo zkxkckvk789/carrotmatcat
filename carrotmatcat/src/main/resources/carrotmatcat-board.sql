@@ -11,7 +11,8 @@ CREATE TABLE carrotmatcat_board(
 	member_id VARCHAR2(100) NOT NULL,
 	CONSTRAINT board_fk FOREIGN KEY(member_id) REFERENCES carrotmatcat_member(member_id) 
 )
-
+ALTER TABLE carrotmatcat_board DROP COLUMN article_image_name;
+ALTER TABLE carrotmatcat_board RENAME COLUMN article_store_category TO article_food_category
 -- 게시판 번호(article_no) 시퀀스 생성
 CREATE SEQUENCE carrotmatcat_board_seq;
 DROP SEQUENCE carrotmatcat_board_seq;
@@ -33,3 +34,9 @@ INSERT INTO carrotmatcat_board(article_no, article_title, article_content,articl
 VALUES(carrotmatcat_board_seq.nextval, '간단하게 식사했어요', '내용', '일식', '유메노키친', SYSDATE,'goodgood.jfif','kimyunsooooo');
 
 SELECT * FROM carrotmatcat_board
+
+-- 게시물 상세보기
+SELECT cb.article_no, cb.article_title,cb.article_food_category, cm.member_nickname, TO_CHAR(cb.article_time_posted,'YYYY.MM.DD HH:MI:SS') AS article_time_posted, cb.article_store_name, cb.article_content, cb.article_hits
+FROM carrotmatcat_board cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id=cm.member_id
+WHERE cb.article_no=?;
