@@ -26,6 +26,12 @@ public class PostVO {
 		this.memberVO = memberVO;
 	}
 
+	//댓글등록시 사용할 생성자
+	public PostVO(long articleNo) {
+		super();
+		this.articleNo = articleNo;
+	}
+
 	// 게시글 리스트 조회시 사용할 생성자
 	public PostVO(long articleNo, String articleTitle, String articleStoreName, long articleHits,
 			String articleTimePosted, MemberVO memberVO) {
