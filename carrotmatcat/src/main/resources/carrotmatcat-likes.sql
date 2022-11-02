@@ -8,3 +8,7 @@ CREATE TABLE carrotmatcat_likes(
 
 INSERT INTO carrotmatcat_likes VALUES(1, 'yerin0110');
 
+<<<<<<< HEAD
+=======
+SELECT * FROM carrotmatcat_likes;
+>>>>>>> refs/heads/model-VO-ces1102
