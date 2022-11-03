@@ -25,12 +25,26 @@ public class PostVO {
 		this.articleContent = articleContent;
 		this.memberVO = memberVO;
 	}
+	
+	//게시글 수정시 사용할 생성자
+	public PostVO(long articleNo, String articleTitle, String articleStoreName, String articleFoodCategory,
+			String articleContent) {
+		super();
+		this.articleNo = articleNo;
+		this.articleTitle = articleTitle;
+		this.articleStoreName = articleStoreName;
+		this.articleFoodCategory = articleFoodCategory;
+		this.articleContent = articleContent;
+	}
+	
 
 	//댓글등록시 사용할 생성자
 	public PostVO(long articleNo) {
 		super();
 		this.articleNo = articleNo;
 	}
+
+
 
 	// 게시글 리스트 조회시 사용할 생성자
 	public PostVO(long articleNo, String articleTitle, String articleStoreName, long articleHits,

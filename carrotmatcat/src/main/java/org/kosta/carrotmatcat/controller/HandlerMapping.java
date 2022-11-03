@@ -8,10 +8,8 @@ public class HandlerMapping {
 	}
 	
 	public Controller create(String controllerName)throws  InstantiationException, IllegalAccessException, ClassNotFoundException {
-	
 		StringBuilder classInfo=new StringBuilder(this.getClass().getPackage().getName());
 		classInfo.append(".").append(controllerName);
 		return (Controller) Class.forName(classInfo.toString()).newInstance();
-	
 	}
 }

@@ -42,7 +42,7 @@ public class BoardDAO {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
-			con=dataSource.getConnection();
+			con=getConnection();
 			StringBuilder sql=new StringBuilder();
 			sql.append("INSERT INTO carrotmatcat_board(article_no, article_title, article_content,article_food_category,article_store_name,article_time_posted,member_id) ");
 			sql.append("VALUES(carrotmatcat_board_seq.nextval,?,?,?,?, SYSDATE,?)");
@@ -136,6 +136,25 @@ public class BoardDAO {
 		}
 		return totalPostCount;
 	}
+	
+	public void updatePost(PostVO postVO) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="UPDATE carrotmatcat_board SET article_title=?, article_store_name=?,article_food_category=?,article_content=? WHERE article_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, postVO.getArticleTitle());
+			pstmt.setString(2, postVO.getArticleStoreName());
+			pstmt.setString(3, postVO.getArticleFoodCategory());
+			pstmt.setString(4, postVO.getArticleContent());
+			pstmt.setLong(5, postVO.getArticleNo());
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt,con);
+		}
+	}
+	
 }
 
 
