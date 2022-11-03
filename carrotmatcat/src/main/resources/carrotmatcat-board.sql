@@ -31,7 +31,6 @@ VALUES(carrotmatcat_board_seq.nextval, '샌드위치먹었어요~^^', '내용입
 INSERT INTO carrotmatcat_board(article_no, article_title, article_content,article_food_category,article_store_name,article_time_posted,article_image_name,member_id)
 VALUES(carrotmatcat_board_seq.nextval, '간단하게 식사했어요', '내용', '일식', '유메노키친', SYSDATE,'kimyunsooooo');
 
-<<<<<<< HEAD
 ALTER TABLE carrotmatcat_board DROP COLUMN article_image_name;
 
 --article_store_category이름 article_food_category로 변경
@@ -43,26 +42,6 @@ AS article_time_posted, cb.article_store_name, cb.article_content, cb.article_hi
 FROM carrotmatcat_board cb
 INNER JOIN carrotmatcat_member cm ON cb.member_id=cm.member_id
 WHERE cb.article_no=?;
-
-SELECT * FROM carrotmatcat_board
-=======
-INSERT INTO carrotmatcat_board(article_no, article_title, article_content,article_food_category,article_store_name,article_time_posted,member_id)
-SELECT carrotmatcat_board_seq.nextval, article_title,article_content,article_food_category,article_store_name,sysdate,member_id FROM carrotmatcat_board;
-
-
-ALTER TABLE carrotmatcat_board DROP COLUMN article_image_name;
-
---article_store_category이름 article_food_category로 변경
-ALTER TABLE carrotmatcat_board RENAME COLUMN article_store_category TO article_food_category;
-
---상세글보기
-SELECT cb.article_no, cb.article_title,cb.article_food_category, cm.member_nickname, TO_CHAR(cb.article_time_posted,'YYYY.MM.DD HH:MI:SS') 
-AS article_time_posted, cb.article_store_name, cb.article_content, cb.article_hits
-FROM carrotmatcat_board cb
-INNER JOIN carrotmatcat_member cm ON cb.member_id=cm.member_id
-WHERE cb.article_no=?;
-
-SELECT * FROM carrotmatcat_board
 
 --게시글 목록 조회용
 SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits
@@ -74,17 +53,6 @@ INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
 WHERE rnum BETWEEN 1 AND 5
 ORDER BY cb.article_no DESC;
 
---
+SELECT * FROM carrotmatcat_board
 
 
-
-
-
-
-
-
-
-
-
-
->>>>>>> refs/heads/model-DAO-board2-lhy1103

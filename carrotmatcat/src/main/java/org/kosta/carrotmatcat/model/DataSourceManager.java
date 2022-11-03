@@ -10,7 +10,7 @@ public class DataSourceManager {
 	private DataSourceManager() {
 		BasicDataSource dbcp=new BasicDataSource();
 		dbcp.setDriverClassName("oracle.jdbc.OracleDriver");
-		dbcp.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:xe");
+		dbcp.setUrl("jdbc:oracle:thin:@52.79.138.27:1521:xe");
 		dbcp.setUsername("scott");
 		dbcp.setPassword("tiger");
 		dbcp.setMaxTotal(30);
