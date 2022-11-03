@@ -110,7 +110,7 @@ public class BoardDAO {
 			pstmt.setLong(2, pagination.getEndRowNumber());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				postList.add(new PostVO(rs.getLong("rnum"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));
+				postList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));
 			}
 		} finally {
 			closeAll(rs,pstmt,con);
