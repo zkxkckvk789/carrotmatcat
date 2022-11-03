@@ -8,7 +8,6 @@ import org.kosta.carrotmatcat.model.PostVO;
 
 public class TestCasePosting {
 	public static void main(String[] args) {
-		PostVO postVO = null;
 		String articleTitle="깨돌이 어떠세요";
 		String articleContent = "나쁘지않더라고요";
 		String articleFoodCategory = "한식";
