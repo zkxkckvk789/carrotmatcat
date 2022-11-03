@@ -118,35 +118,6 @@ public class BoardDAO {
 		return postList;
 	}
 	
-	public ArrayList<PostVO> findPostList(ArrayList<PostVO> postVOList,Pagination pagination) throws SQLException{
-		ArrayList<PostVO> postList=postVOList;
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		try {
-			con=getConnection();
-			StringBuilder sql=new StringBuilder();
-			sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits");
-			sql.append(" FROM(");
-			sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
-			sql.append(" AS article_time_posted,article_hits FROM carrotmatcat_board");
-			sql.append(" ) cb");
-			sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
-			sql.append(" WHERE rnum BETWEEN ? AND ?");
-			sql.append(" ORDER BY cb.article_no DESC");
-			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setLong(1, pagination.getStartRowNumber());
-			pstmt.setLong(2, pagination.getEndRowNumber());
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				postList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));
-			}
-		} finally {
-			closeAll(rs,pstmt,con);
-		}
-		return postList;
-	}
-	
 	public int getTotalPostCount() throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -291,61 +262,50 @@ public class BoardDAO {
 	      return articleContentList;
 	   }
 	
-	//member Id가 좋아요 누를 게시글들의 articleNo를 array로 받는 method
-	public ArrayList<Long> getLikedPostByMemberId(String memberId) throws SQLException {
-		ArrayList<Long> getLikedPostByMemberIdList=new ArrayList<>();
-		 Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      try {
-	    	  con=getConnection();
-	    	  StringBuilder sql=new StringBuilder();
-	    	  sql.append("SELECT cl.article_no");
-	    	  sql.append(" FROM carrotmatcat_likes cl");
-	    	  sql.append(" LEFT JOIN carrotmatcat_board cb");
-	    	  sql.append(" ON cl.article_no=cb.article_no");
-	    	  sql.append(" WHERE cl.member_id=?");
-	    	  pstmt=con.prepareStatement(sql.toString());
-	    	  pstmt.setString(1, memberId);
-	    	  rs=pstmt.executeQuery();
-	    	  while(rs.next()) {
-	    		  getLikedPostByMemberIdList.add(rs.getLong("article_no"));
-	    	  }
-	      } finally {
-	    	  closeAll(rs,pstmt,con);
-	      }
-		return getLikedPostByMemberIdList;
-	}
-	
-	public ArrayList<PostVO> findLikesListPostByMemberId(String memberId,ArrayList<Long> getLikedPostByMemberIdList) throws SQLException{
-		 ArrayList<Long> getLikedPostByMemberIdList2 = getLikedPostByMemberId(memberId);
-		 ArrayList<PostVO> articleMemberIdList = new  ArrayList<PostVO>();		 
-		 Connection con = null;
-		 PreparedStatement pstmt = null;
-		 ResultSet rs = null;
-		 try {
-			 con = getConnection();
-			 for(int i=0;i<getLikedPostByMemberIdList2.size();i++) {
-				 Long articleNo=getLikedPostByMemberIdList2.get(i);
-				 StringBuilder sql=new StringBuilder();
-				 sql.append("SELECT cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id");
-				 sql.append(" FROM carrotmatcat_board cb");
-				 sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
-				 sql.append(" WHERE cb.article_no=?");
-				 pstmt=con.prepareStatement(sql.toString());
-				 pstmt.setLong(1,articleNo);
-				 rs=pstmt.executeQuery();
-				 if(rs.next()) {
-					 articleMemberIdList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));					 
-				 }
-			 } 
-		 }finally {
-			 closeAll(rs,pstmt,con);
-		 } 
+	public ArrayList<PostVO> findLikesListPostByMemberId(String memberId,Pagination pagination) throws SQLException{
+		ArrayList<PostVO> articleMemberIdList = new  ArrayList<PostVO>();		 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category");
+			sql.append(" FROM carrotmatcat_board cb");
+			sql.append(" INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl");
+			sql.append(" ON cl.article_no=cb.article_no");
+			sql.append(" INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id");
+			sql.append(" WHERE rnum BETWEEN ? AND ? AND cl.member_id=?");
+			sql.append(" ORDER BY cb.article_no DESC");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setLong(1, pagination.getStartRowNumber());
+			pstmt.setLong(2, pagination.getEndRowNumber());
+			pstmt.setString(3, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
+				articleMemberIdList.add(postVO);
+			}
+		}finally {
+			closeAll(rs,pstmt,con);
+		} 
 		return articleMemberIdList;	
 	}
 	
 	
+	public void updateHits(long articleNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setLong(1, articleNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt,con);
+		}
+	}
 	
 	
 	

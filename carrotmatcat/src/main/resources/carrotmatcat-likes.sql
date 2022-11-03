@@ -18,11 +18,17 @@ DELETE FROM carrotmatcat_likes WHERE article_no='1' AND member_id='javaking';
 --
 SELECT COUNT(*) FROM carrotmatcat_likes WHERE member_id='yerin0110';
 
+--
 SELECT cl.article_no
 FROM carrotmatcat_likes cl
 LEFT JOIN carrotmatcat_board cb
 ON cl.article_no=cb.article_no
 WHERE cl.member_id='yerin0110';
+
+--총 좋아요 수 조회
+SELECT COUNT(*) FROM carrotmatcat_likes WHERE article_no=1;
+
+
 
 SELECT * FROM carrotmatcat_likes;
 

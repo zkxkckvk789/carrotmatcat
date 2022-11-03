@@ -91,23 +91,56 @@ WHERE rnum BETWEEN 1 AND 5 AND cb.article_content LIKE '%입니다%'
 ORDER BY cb.article_no DESC;
 
 --내가 좋아요 누른 게시글 목록조회
-SELECT cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id
-FROM carrotmatcat_board cb
-INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
-WHERE cb.article_no=1;
+-- cb에서 부여받은 rnum을 그대로 들고옴, 하지만 우리가 원하는건 가져온 목록에 rnum을 부여하는 것
+SELECT cb.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
+FROM carrotmatcat_likes cl 
+LEFT JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board) cb 
+ON cl.article_no=cb.article_no 
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
+WHERE cl.member_id='yerin0110';
 
-
-SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id
-FROM(
-SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
-AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board
- ) cb
-INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
-WHERE rnum BETWEEN 1 AND 5 AND cb.article_no=1
-
+--이것도 가능하고
+SELECT ROW_NUMBER() OVER(ORDER BY cl.article_no DESC) AS rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
+FROM carrotmatcat_likes cl
+INNER JOIN (SELECT article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board) cb
+ON cl.article_no=cb.article_no
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
+WHERE cl.member_id='yerin0110'
 ORDER BY cb.article_no DESC;
+
+--이것도 가능한데 뭐로 하지
+SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
+FROM carrotmatcat_board cb
+INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no 
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
+WHERE rnum BETWEEN 1 AND 5 AND cl.member_id='yerin0110'
+ORDER BY cb.article_no DESC;
+
+
+--조회수 증가
+UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=1;
+UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=?;
 
 SELECT * FROM carrotmatcat_board
 
 COMMIT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
