@@ -11,8 +11,7 @@ public class TestCasefindPostList {
 		ArrayList<PostVO> list;
 		try {
 			Pagination pagination = new Pagination(BoardDAO.getInstance().getTotalPostCount(), 1);
-			list = BoardDAO.getInstance().findPostList(pagination);
-			for(PostVO post:list) {
+			list = BoardDAO.getInstance().findPostList(pagination); 			for(PostVO post:list) {
 				System.out.println(post); 			
 			}
 		}catch (Exception e) {
