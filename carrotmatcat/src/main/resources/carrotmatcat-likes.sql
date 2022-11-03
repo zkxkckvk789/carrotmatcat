@@ -8,9 +8,21 @@ CREATE TABLE carrotmatcat_likes(
 
 -- 좋아요 추가
 INSERT INTO carrotmatcat_likes VALUES(1, 'yerin0110');
+INSERT INTO carrotmatcat_likes VALUES(6, 'yerin0110');
+INSERT INTO carrotmatcat_likes VALUES(9, 'yerin0110');
+
 
 -- 좋아요 삭제
 DELETE FROM carrotmatcat_likes WHERE article_no='1' AND member_id='javaking';
+
+--
+SELECT COUNT(*) FROM carrotmatcat_likes WHERE member_id='yerin0110';
+
+SELECT cl.article_no
+FROM carrotmatcat_likes cl
+LEFT JOIN carrotmatcat_board cb
+ON cl.article_no=cb.article_no
+WHERE cl.member_id='yerin0110';
 
 SELECT * FROM carrotmatcat_likes;
 

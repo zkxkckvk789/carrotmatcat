@@ -76,7 +76,7 @@ public class BoardDAO {
 			pstmt.setLong(1,articleNo);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				MemberVO memberVO=new MemberVO();
+				MemberVO memberVO=new MemberVO(null,null,rs.getString("member_nickname"));
 				postVO = new PostVO(rs.getLong("article_no"),rs.getString("article_title"),
 						rs.getString("article_store_name"), rs.getString("article_food_category"),  
 						rs.getString("article_content"), rs.getLong("article_hits"),
@@ -91,6 +91,35 @@ public class BoardDAO {
 
 	public ArrayList<PostVO> findPostList(Pagination pagination) throws SQLException{
 		ArrayList<PostVO> postList=new ArrayList<>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits");
+			sql.append(" FROM(");
+			sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
+			sql.append(" AS article_time_posted,article_hits FROM carrotmatcat_board");
+			sql.append(" ) cb");
+			sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+			sql.append(" WHERE rnum BETWEEN ? AND ?");
+			sql.append(" ORDER BY cb.article_no DESC");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setLong(1, pagination.getStartRowNumber());
+			pstmt.setLong(2, pagination.getEndRowNumber());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				postList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));
+			}
+		} finally {
+			closeAll(rs,pstmt,con);
+		}
+		return postList;
+	}
+	
+	public ArrayList<PostVO> findPostList(ArrayList<PostVO> postVOList,Pagination pagination) throws SQLException{
+		ArrayList<PostVO> postList=postVOList;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -154,6 +183,174 @@ public class BoardDAO {
 			closeAll(pstmt,con);
 		}
 	}
+	
+	public void deletePostByNo(long articleNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="DELETE FROM carrotmatcat_board WHERE article_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setLong(1, articleNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt,con);
+		}
+	}
+	
+	public ArrayList<PostVO> findPostListByFood(String articleFoodCategory, Pagination pagination) throws SQLException{
+		ArrayList<PostVO> articleFoodCategoryList=new ArrayList<>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category");
+			sql.append(" FROM(");
+			sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
+			sql.append(" AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board");
+			sql.append(" ) cb");
+			sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+			sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?");
+			sql.append(" ORDER BY cb.article_no DESC");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setLong(1, pagination.getStartRowNumber());
+			pstmt.setLong(2, pagination.getEndRowNumber());
+			pstmt.setString(3, articleFoodCategory);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
+				articleFoodCategoryList.add(postVO);
+			}
+		} finally {
+			closeAll(rs,pstmt,con);
+		}
+		return articleFoodCategoryList;
+	}
+	
+	public ArrayList<PostVO> searchStoreListByTitle(String articleTitle, Pagination pagination) throws SQLException{
+		ArrayList<PostVO> articleTitleList=new ArrayList<>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category");
+			sql.append(" FROM(");
+			sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
+			sql.append(" AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board");
+			sql.append(" ) cb");
+			sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+			sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_title LIKE '%'||?||'%'");
+			sql.append(" ORDER BY cb.article_no DESC");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setLong(1, pagination.getStartRowNumber());
+			pstmt.setLong(2, pagination.getEndRowNumber());
+			pstmt.setString(3, articleTitle);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
+				articleTitleList.add(postVO);
+			}
+		} finally {
+			closeAll(rs,pstmt,con);
+		}
+		return articleTitleList;
+	}
+	
+	public ArrayList<PostVO> searchStoreListByContent(String articleContent, Pagination pagination) throws SQLException{
+	      ArrayList<PostVO> articleContentList = new ArrayList<>();
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         con = getConnection();
+	         StringBuilder sql=new StringBuilder();
+	         sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category, cb.article_content ");
+	         sql.append(" FROM( ");
+	         sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS') ");
+	         sql.append(" AS article_time_posted,article_hits, article_food_category, article_content FROM carrotmatcat_board");
+	         sql.append(" ) cb ");
+	         sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id ");
+	         sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_content LIKE '%'||?||'%'");
+	         sql.append(" ORDER BY cb.article_no DESC");
+	         pstmt=con.prepareStatement(sql.toString());
+	         pstmt.setLong(1, pagination.getStartRowNumber());
+	         pstmt.setLong(2, pagination.getEndRowNumber());
+	         pstmt.setString(3, articleContent);
+	         rs =pstmt.executeQuery();
+	         while(rs.next()) {
+	            PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
+	            articleContentList.add(postVO);
+	         }
+	      } finally {
+	         closeAll(rs,pstmt,con);
+	      }
+	      return articleContentList;
+	   }
+	
+	//member Id가 좋아요 누를 게시글들의 articleNo를 array로 받는 method
+	public ArrayList<Long> getLikedPostByMemberId(String memberId) throws SQLException {
+		ArrayList<Long> getLikedPostByMemberIdList=new ArrayList<>();
+		 Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	    	  con=getConnection();
+	    	  StringBuilder sql=new StringBuilder();
+	    	  sql.append("SELECT cl.article_no");
+	    	  sql.append(" FROM carrotmatcat_likes cl");
+	    	  sql.append(" LEFT JOIN carrotmatcat_board cb");
+	    	  sql.append(" ON cl.article_no=cb.article_no");
+	    	  sql.append(" WHERE cl.member_id=?");
+	    	  pstmt=con.prepareStatement(sql.toString());
+	    	  pstmt.setString(1, memberId);
+	    	  rs=pstmt.executeQuery();
+	    	  while(rs.next()) {
+	    		  getLikedPostByMemberIdList.add(rs.getLong("article_no"));
+	    	  }
+	      } finally {
+	    	  closeAll(rs,pstmt,con);
+	      }
+		return getLikedPostByMemberIdList;
+	}
+	
+	public ArrayList<PostVO> findLikesListPostByMemberId(String memberId,ArrayList<Long> getLikedPostByMemberIdList) throws SQLException{
+		 ArrayList<Long> getLikedPostByMemberIdList2 = getLikedPostByMemberId(memberId);
+		 ArrayList<PostVO> articleMemberIdList = new  ArrayList<PostVO>();		 
+		 Connection con = null;
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 try {
+			 con = getConnection();
+			 for(int i=0;i<getLikedPostByMemberIdList2.size();i++) {
+				 Long articleNo=getLikedPostByMemberIdList2.get(i);
+				 StringBuilder sql=new StringBuilder();
+				 sql.append("SELECT cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id");
+				 sql.append(" FROM carrotmatcat_board cb");
+				 sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+				 sql.append(" WHERE cb.article_no=?");
+				 pstmt=con.prepareStatement(sql.toString());
+				 pstmt.setLong(1,articleNo);
+				 rs=pstmt.executeQuery();
+				 if(rs.next()) {
+					 articleMemberIdList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));					 
+				 }
+			 } 
+		 }finally {
+			 closeAll(rs,pstmt,con);
+		 } 
+		return articleMemberIdList;	
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

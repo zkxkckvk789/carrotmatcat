@@ -53,6 +53,61 @@ INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
 WHERE rnum BETWEEN 1 AND 5
 ORDER BY cb.article_no DESC;
 
+--게시글 수정
+
+
+-- 게시글 삭제용
+DELETE FROM carrotmatcat_board WHERE article_no=2;
+
+
+--음식 카테고리로 게시글 목록조회
+SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS') 
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board
+) cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?
+ORDER BY cb.article_no DESC;
+
+--제목으로 검색한 목록조회
+SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS') 
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board
+) cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+WHERE rnum BETWEEN ? AND ? AND cb.article_title LIKE '%?%'
+ORDER BY cb.article_no DESC;
+
+--내용으로 검색한 목록조회
+SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.article_content
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
+AS article_time_posted,article_hits, article_food_category,article_content FROM carrotmatcat_board
+ ) cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+WHERE rnum BETWEEN 1 AND 5 AND cb.article_content LIKE '%입니다%'
+ORDER BY cb.article_no DESC;
+
+--내가 좋아요 누른 게시글 목록조회
+SELECT cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id
+FROM carrotmatcat_board cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+WHERE cb.article_no=1;
+
+
+SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.member_id
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board
+ ) cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+WHERE rnum BETWEEN 1 AND 5 AND cb.article_no=1
+
+ORDER BY cb.article_no DESC;
+
 SELECT * FROM carrotmatcat_board
 
+COMMIT
 

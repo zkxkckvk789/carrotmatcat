@@ -9,6 +9,10 @@ CREATE TABLE carrotmatcat_comment(
 	CONSTRAINT comment_member_id_fk FOREIGN KEY(member_id) REFERENCES carrotmatcat_member(member_id)
 )
 
+--테이블 제약조건 수정(이미 생성된 CONSTRAINT 삭제 후 새로운 CONSTRAINT 생성)
+ALTER TABLE carrotmatcat_comment DROP CONSTRAINT comment_article_no_fk;
+ALTER TABLE carrotmatcat_comment ADD CONSTRAINT comment_article_no_fk foreign KEY (article_no) REFERENCES carrotmatcat_board(article_no) ON DELETE CASCADE;
+
 CREATE SEQUENCE carrotmatcat_comment_seq;
 DROP SEQUENCE carrotmatcat_comment_seq;
 
@@ -35,4 +39,5 @@ DELETE FROM carrotmatcat_comment WHERE comment_no=?
 
 -- 댓글 수정
 UPDATE carrotmatcat_comment SET comment_content='공감하지않습니다' WHERE comment_no=1;
+
 
