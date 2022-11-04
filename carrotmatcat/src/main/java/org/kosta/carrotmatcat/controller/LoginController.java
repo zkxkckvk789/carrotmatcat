@@ -22,7 +22,7 @@ public class LoginController implements Controller {
 		MemberVO memberVO=MemberDAO.getInstance().login(memberId,memberPassword);
 		if(memberVO!=null) {
 			ArrayList<Long> viewPost=new ArrayList<>();
-			HttpSession session=request.getSession();
+			HttpSession session=request.getSession(false);
 			session.setAttribute("memberVO", memberVO);
 			session.setAttribute("viewPost",viewPost);
 			path="redirect:HomeController.do";
