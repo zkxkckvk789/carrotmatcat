@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="carrotmatcat_css/carrotmatcat_layout.css">
 </head>
 <body>
-<div class="navigation-container">
+
 <%-- header/nav 영역 --%>
  <c:import url="carrotmatcat_header.jsp"></c:import>
 <%-- header/nav 영역끝 --%>
-</div>
+
 <div class="container pt-3">
 <%-- main 영역 --%>
 <br><br><br><br><br><br>
