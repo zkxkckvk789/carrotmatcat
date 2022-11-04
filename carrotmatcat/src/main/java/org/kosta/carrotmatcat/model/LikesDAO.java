@@ -67,4 +67,25 @@ public class LikesDAO {
 		}
 	}
 
+	public long likeCount(long articleNo) throws SQLException {
+		long totalLikeCount=0;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=getConnection();
+			String sql="SELECT COUNT(*) FROM carrotmatcat_likes WHERE article_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setLong(1, articleNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				totalLikeCount=rs.getLong(1);
+			}
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		return totalLikeCount;
+	}
+	
+	
 }

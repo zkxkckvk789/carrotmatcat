@@ -108,6 +108,17 @@ AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_boa
 ON cl.article_no=cb.article_no
 INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
 WHERE cl.member_id='yerin0110'
+<<<<<<< HEAD
+ORDER BY cb.article_no DESC;
+
+--이것도 가능한데 뭐로 하지
+SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
+FROM carrotmatcat_board cb
+INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no 
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
+WHERE rnum BETWEEN 1 AND 5 AND cl.member_id='yerin0110'
+=======
+>>>>>>> refs/heads/model-DAO-board5-lhy1104
 ORDER BY cb.article_no DESC;
 
 --이것도 가능한데 뭐로 하지
@@ -117,6 +128,11 @@ INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_n
 INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
 WHERE rnum BETWEEN 1 AND 5 AND cl.member_id='yerin0110'
 ORDER BY cb.article_no DESC;
+
+
+--조회수 증가
+UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=1;
+UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=?;
 
 SELECT * FROM carrotmatcat_board
 

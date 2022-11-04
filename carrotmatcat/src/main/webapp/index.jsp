@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>당근맛캣 Carrot Mat Cat</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -20,7 +20,11 @@
 </head>
 <body>
 <div class="container pt-3">
+<h3>당신 근처의 맛집을 캣치</h3>
+<h1>당근맛캣</h1>
+<a href="carrotmatcat_layout.jsp">
+	<img src="carrotmatcat_images/matcat.png"> 
+</a>
 </div>
-
 </body>
 </html>
