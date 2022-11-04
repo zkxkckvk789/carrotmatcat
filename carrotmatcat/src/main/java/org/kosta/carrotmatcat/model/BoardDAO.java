@@ -292,45 +292,19 @@ public class BoardDAO {
 		return articleMemberIdList;	
 	}
 	
-	
-	
-	
-	
-	
-	/*
-	//member Id가 좋아요 누를 게시글들의 articleNo를 array로 받는 method
-	public ArrayList<Long> getLikedPostByMemberId(String memberId) throws SQLException {
-		ArrayList<Long> getLikedPostByMemberIdList=new ArrayList<>();
-		 Connection con = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      try {
-	    	  con=getConnection();
-	    	  StringBuilder sql=new StringBuilder();
-	    	  sql.append("SELECT cl.article_no");
-	    	  sql.append(" FROM carrotmatcat_likes cl");
-	    	  sql.append(" LEFT JOIN carrotmatcat_board cb");
-	    	  sql.append(" ON cl.article_no=cb.article_no");
-	    	  sql.append(" WHERE cl.member_id=?");
-	    	  pstmt=con.prepareStatement(sql.toString());
-	    	  pstmt.setString(1, memberId);
-	    	  rs=pstmt.executeQuery();
-	    	  while(rs.next()) {
-	    		  getLikedPostByMemberIdList.add(rs.getLong("article_no"));
-	    	  }
-	      } finally {
-	    	  closeAll(rs,pstmt,con);
-	      }
-		return getLikedPostByMemberIdList;
+	public void updateHits(long articleNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setLong(1, articleNo);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt,con);
+		}
 	}
-	*/
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
