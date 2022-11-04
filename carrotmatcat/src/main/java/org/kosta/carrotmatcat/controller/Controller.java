@@ -4,5 +4,5 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface Controller {
-	String handlerRequest(HttpServletRequest reuqest, HttpServletResponse response)throws Exception;
+	String handlerRequest(HttpServletRequest request, HttpServletResponse response)throws Exception;
 }
