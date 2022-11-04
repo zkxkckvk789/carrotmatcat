@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+ul {
+margin-top: Opx;
+margin-bottom: 10px; 
+padding-left: 40px;
+}
+ol {
+margin-top: Opx;
+margin-bottom: 10px; 
+padding-left: 40px;
+}
+
+li {
+margin-top: 5px; 
+margin-bottom: 5px;
+font-family: 'IBM Plex Mono', sans-serif;
+color: #000; 
+font-size: 14px; 
+line-height: 24px; 
+font-weight: 400;
+}
+
+img {
+display: inline-block; 
+max-width: 100%;
+}
+
+blockquote {
+margin-bottom: 10px;
+padding: 10px 20px;
+border-color: #5ab963 #5ab963 #5ab963;
+border-left-style: solid;
+border-left-width: 5px;
+font-family: '"IBM Plex Mono', sans-serif;
+color: #000;
+font-size: 16px;
+line-height: 24px;
+font-weight: 400;
+}
+
+figcaption {
+margin-top: 5px;
+text-align: center;
+}
+
+navigation {
+position: relative;
+z-index: 1;
+display: -webkit-box; display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+padding-right: 30px; padding-left: 30px;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center; justify-content: center;
+-webkit-box-align: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+background-color: transparent;
+}
+
+navigation-container {
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+width: 100%; height: 90px;
+max-width: 1170px; margin-right: Opx; margin-left: Opx;
+-webkit-box-pack: justify;
+-webkit-justify-content: space-between;
+-ms-flex-pack: justify;
+justify-content: space-between;
+-webkit-box-align: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+}
+
+.header {
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+width: 100%;
+margin-top: -90px;
+padding: 210px 30px 120px;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center; justify-content: center;
+-webkit-box-align: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+background-color: #aac414;
+}
+
+_navigation-links {
+display: -webkit-box; display: -webkit-flex; display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center; justify-content: center;
+-webkit-box-align: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+}
+
+navigation-link {
+margin-right: 15px; margin-left: 15px;
+font-family: 'Libre Franklin', sans-serif;
+color: #fff;
+font-size: 14px; line-height: 24px; font-weight: 600; text-decoration: none;
+}
+
+bullet {
+width: 4px;
+height: 4px;
+margin-right: 15px; margin-left: 15px; border-radius: 50%; background-color: #fff;
+}
+
+navigation-button {
+margin-left: 15px; border: 2px solid #fff; border-radius: 4px;
+background-color: transparent;
+-webkit-transition: background-color 200ms ease, color 200ms ease; transition: background-color 200ms ease, color 200ms ease; font-family: 'Libre Franklin', sans-serif;
+color: #fff;
+font-size: 14px; line-height: 24px; font-weight: 600;
+}
+
+navigation-button:hover {
+background-color: #fff;
+color: #000;
+}
+
+header-content {
+max-width: 770px;
+-webkit-perspective: 2000px; perspective: 2000px;
+text-align: center;
+}
+
+button {
+margin-top: 50px; padding: 15px 30px; border-radius: 4px;
+background-color: #5ab963;
+-webkit-transition: background-color 200ms ease;
+transition: background-color 200ms ease; font-family: 'Libre Franklin', sans-serif;
+color: #fff;
+font-size: 16px; line-height: 30px; font-weight: 800;
+}
+
+button:hover {
+background-color: #48944f;
+}
+button.cc-cta {
+margin-top: Opx;
+}
+button.cc-banner {
+background-color: #fff;
+color: #000;
+}
+
+button.cc-banner:hover {
+	background-color: white;
+}
+
+.container {
+position: relative;
+z-index: 1;
+width: 100%;
+max-width: 1170px;
+}
+
