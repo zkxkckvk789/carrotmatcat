@@ -22,7 +22,7 @@
 							<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${post.articleNo}">${post.articleTitle}</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath}/LoginFormController.do">${post.articleTitle}</a>
+							<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${post.articleTitle}</a>
 						</c:otherwise>
 					</c:choose>				
 				</td>
