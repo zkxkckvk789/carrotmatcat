@@ -17,32 +17,45 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<div class="container pt-3">
-		<h2>회원가입</h2>
-		<form action="RegisterMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
-			<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
-			<span id="checkResult"></span><br>
-			<button type="button" onkeyup="checkDuplicateMemberId()">아이디 중복확인</button>
-			
-			
-			<span id="checkResult"></span><br> <input type="text" name="name" placeholder="닉네임" required="required">
-			<button>닉네임 중복확인</button>
-			<br>
-			 <input type="password" name="password" placeholder="비밀번호" required="required"><br> <input type="password" name="password" placeholder="비밀번호확인" required="required"><br>
-			<button type="submit">회원가입</button>
-		</form>
-		<script type="text/javascript">
-	let checkFlag=false;
+<form action="${pageContext.request.contextPath}/RegisterMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
+	<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
+	<button type="button" onclick="checkMemberId()">아이디 중복확인</button>
+	<span id="checkMemberIdResult"></span><br>
+	
+	<input type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"><br>
+	<input type="password" name="memberPassword" id="memberPasswordTwo" placeholder="패스워드" required="required" onkeyup="checkPassword()"><br>
+	<span id="checkMemberPasswordResult"></span><br>
+	
+	<input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required">
+	<button type="button" onclick="checkMemberNickname()">닉네임 중복확인</button>
+	<span id="checkMemberNicknameResult"></span><br>
+	
+	<button type="submit">회원가입</button>
+</form>
+<script type="text/javascript">
+	let checkMemberIdFlag=false;
+	let checkMemberNicknameFlag = false;
+	
 	function checkRegisterForm(event){
-		if(checkFlag==false){
-			alert("아이디 인증을 받으세요");
+		if(checkMemberIdFlag==false){
+			alert("아이디 인증을 받으세요.");
+			event.preventDefault();
+		}
+		else if(checkMemberPasswordResult.innerHTML!=""){
+			console.log(checkMemberPasswordResult.innerHTML);
+			alert("비밀번호 인증을 받으세요.");
+			event.preventDefault();
+		}
+		else if(checkMemberNicknameFlag==false){
+			alert("닉네임 인증을 받으세요.");
 			event.preventDefault();
 		}
 	}
-	function checkDuplicateMemberId() {
-		checkFlag=false;
+	
+	function checkMemberId() {
+		checkMemberIdFlag=false;
      	let memberId=document.getElementById("memberId").value;
-		let checkResultSpan=document.getElementById("checkResult");
+		let checkMemberIdResult=document.getElementById("checkMemberIdResult");
 		if(memberId.length<4){
 			checkResultSpan.innerHTML="<font color=pink>아이디는 4자 이상</font>";
 		}else{
@@ -50,18 +63,50 @@
 			xhr.onreadystatechange=function(){
 				if(xhr.readyState==4&&xhr.status==200){
 					if(xhr.responseText=="ok"){
-						checkResultSpan.innerHTML="<font color=blue>사용가능</font>";
-						checkFlag=true;
+						checkMemberIdResult.innerHTML="<font color=blue>사용가능한 아이디 입니다.</font>";
+						checkMemberIdFlag=true;
 					}else{
-						checkResultSpan.innerHTML="<font color=red>사용불가</font>";
+						checkMemberIdResult.innerHTML="<font color=red>존재하는 아이디 입니다. </font>";
 					}
 				}//if
 			}//function
-			xhr.open("get","CheckDuplicateIdController.do?id="+memberId);
+			xhr.open("get","${pageContext.request.contextPath}/CheckDuplicateIdController.do?memberId="+memberId);
 			xhr.send();
 		}//else
 	}//checkId
+	
+	function checkPassword(event){
+		let memberPasswordOne=document.getElementById("memberPasswordOne").value;
+		let memberPasswordTwo=document.getElementById("memberPasswordTwo").value;
+		if(memberPasswordOne!=memberPasswordTwo){
+			checkMemberPasswordResult.innerHTML="<font color=red>비밀번호가 일치하지않습니다. </font>";
+		}
+		else{
+			checkMemberPasswordResult.innerHTML="";
+		}
+	}
+	
+	function checkMemberNickname() {
+     	let memberNickname=document.getElementById("memberNickname").value;
+		let checkMemberNicknameResult=document.getElementById("checkMemberNicknameResult");
+		let xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				if(xhr.responseText=="ok"){
+					checkMemberNicknameResult.innerHTML="<font color=blue>사용가능한 닉네임 입니다.</font>";
+					checkMemberNicknameFlag=true;
+				}else{
+					checkMemberNicknameResult.innerHTML="<font color=red>존재하는 닉네임 입니다. </font>";
+				}
+			}//if
+		}//function
+		xhr.open("get","${pageContext.request.contextPath}/CheckDuplicateNicknameController.do?memberNickname="+memberNickname);
+		xhr.send();
+	}
 </script>
-	</div>
+</div>
 </body>
 </html>
+
+
+

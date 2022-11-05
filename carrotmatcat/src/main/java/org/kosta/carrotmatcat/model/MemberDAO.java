@@ -112,6 +112,7 @@ public class MemberDAO {
 	}
 	
 	public boolean checkDuplicateNickname(String memberNickname) throws SQLException {
+		
 		boolean result=false;
 		Connection con=null;
 		PreparedStatement pstmt=null;

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.carrotmatcat.model.BoardDAO;
+import org.kosta.carrotmatcat.model.CommentDAO;
 import org.kosta.carrotmatcat.model.Pagination;
 
 public class FindPostListController implements Controller {
@@ -12,6 +13,7 @@ public class FindPostListController implements Controller {
 		BoardDAO boardDAO=BoardDAO.getInstance();
 		String pageNo=request.getParameter("pageNo");
 		Pagination pagination=null;
+		
 		int totalPostCount=boardDAO.getTotalPostCount();
 		if(pageNo==null) {
 			pagination=new Pagination(totalPostCount);

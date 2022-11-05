@@ -22,12 +22,13 @@ public class LoginController implements Controller {
 		MemberVO memberVO=MemberDAO.getInstance().login(memberId,memberPassword);
 		if(memberVO!=null) {
 			ArrayList<Long> viewPost=new ArrayList<>();
-			HttpSession session=request.getSession(false);
+			HttpSession session=request.getSession();
 			session.setAttribute("memberVO", memberVO);
 			session.setAttribute("viewPost",viewPost);
 			path="redirect:HomeController.do";
 		} else {
-			path="carrotmatcat_member/carrotmatcat_login_fail.jsp";
+			System.out.println("로그인 실패");
+			path="redirect:carrotmatcat_member/carrotmatcat_login_fail.jsp";
 		}
 		return path;
 	}

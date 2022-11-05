@@ -5,12 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.carrotmatcat.model.MemberDAO;
 
-
-public class CheckDuplicateIdController implements Controller{
-	@Override
+public class CheckDuplicateNicknameController implements Controller{
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String memberId = request.getParameter("memberId");
-		boolean result=MemberDAO.getInstance().checkDuplicateId(memberId);
+		String memberNickname = request.getParameter("memberNickname");
+		System.out.println("hi hello");
+		boolean result=MemberDAO.getInstance().checkDuplicateNickname(memberNickname);
 		String message = null;
 		if(result) // id가 중복된다는 의미 
 			message="fail";

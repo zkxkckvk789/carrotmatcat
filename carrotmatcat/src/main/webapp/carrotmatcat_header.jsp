@@ -41,8 +41,8 @@
                         <li class="nav-item"><a class="nav-link" href="#services">오늘 뭐 먹지?</a></li>
                         <c:choose>
                         	<c:when test="${sessionScope.memberVO==null}">
-                       			<li class="nav-item"><a class="nav-link" href="LoginController.do">로그인</a></li>
-                      			<li class="nav-item"><a class="nav-link" href="#contact">회원가입</a></li>
+                       			<li class="nav-item"><a class="nav-link" href="carrotmatcat_member/carrotmatcat_login_form.jsp" >로그인</a></li>
+                      			<li class="nav-item"><a class="nav-link" href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a></li>
                         	</c:when>
                         	<c:otherwise>
                         		<li class="nav-item"><a class="nav-link" href="#contact">마이페이지</a></li>
