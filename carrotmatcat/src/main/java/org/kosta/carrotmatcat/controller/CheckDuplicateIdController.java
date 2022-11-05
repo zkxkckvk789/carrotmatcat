@@ -12,6 +12,7 @@ public class CheckDuplicateIdController implements Controller{
 		String memberId = request.getParameter("memberId");
 		boolean result=MemberDAO.getInstance().checkDuplicateId(memberId);
 		String message = null;
+		System.out.println("hi!!");
 		if(result) // id가 중복된다는 의미 
 			message="fail";
 		else // id가 중복되지 않아 사용할 수 있다는 의미 

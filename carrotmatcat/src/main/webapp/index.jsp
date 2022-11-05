@@ -25,6 +25,7 @@
 <a href="carrotmatcat_member/carrotmatcat_login_form.jsp">
 	<img src="carrotmatcat_images/matcat.png" style="width: 30vw"> 
 </a>
+<a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a>
 </div>
 </body>
 </html>
