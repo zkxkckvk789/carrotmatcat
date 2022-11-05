@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,19 +21,15 @@
 </head>
 <body>
 
-<%-- header/nav 영역 --%>
- <c:import url="carrotmatcat_header.jsp"></c:import>
-<%-- header/nav 영역끝 --%>
-
-
+	<%-- header/nav 영역 --%>
+	<c:import url="carrotmatcat_header.jsp"></c:import>
+	<%-- header/nav 영역끝 --%>
 <%-- main 영역 --%>
 <br><br><br><br><br><br>
 
 <c:import url="${requestScope.url}"></c:import>
-
 <br><br><br><br><br><br>
 <%-- main 영역끝 --%>
-
 <div>
 <%-- footer 영역 --%>
  <c:import url="carrotmatcat_footer.jsp"></c:import>
