@@ -18,7 +18,7 @@ DROP SEQUENCE carrotmatcat_comment_seq;
 
 -- 댓글 등록
 INSERT INTO carrotmatcat_comment(comment_no, comment_content, comment_time_posted, article_no, member_id)
-VALUES(carrotmatcat_comment_seq.nextval, '공감합니다', SYSDATE, 1, 'chaeeunseo');
+VALUES(carrotmatcat_comment_seq.nextval, '공감합니다', SYSDATE, 39, 'chaeeunseo');
 
 INSERT INTO carrotmatcat_comment(comment_no, comment_content, comment_time_posted, article_no, member_id)
 VALUES(carrotmatcat_comment_seq.nextval, '맛있겠어요', SYSDATE, 2, 'hasense9410');

@@ -22,7 +22,7 @@ VALUES(?,?,?);
 
 --update 회원 수정
 -- member_id -> readonly
-UPDATE carrotmatcat_member SET member_nickname='예린공주' WHERE member_id='yerin0110';
+UPDATE carrotmatcat_member SET member_nickname='예린공주' WHERE member_nickname='공주';
 UPDATE carrotmatcat_member SET member_nickname=?, member_password=? WHERE member_id=?;
 
 -- delete 회원 삭제

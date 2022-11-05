@@ -34,11 +34,7 @@ color:white;
 <h3>당신 근처의 맛집을 캣치</h3>
 <h1>당근맛캣</h1>
 <a href="carrotmatcat_member/carrotmatcat_login_form.jsp">
-<<<<<<< HEAD
-	<img src="carrotmatcat_images/matcat.png" style="width: 30vw"> 
-=======
 	<img src="carrotmatcat_images/matcat.png" style="width: 30%"> 
->>>>>>> refs/heads/view-JSP2-lhy1105
 </a>
 <a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a>
 </div>
