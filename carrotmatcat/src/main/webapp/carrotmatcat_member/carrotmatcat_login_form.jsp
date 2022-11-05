@@ -17,10 +17,11 @@
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
+   border-radius:20px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
-  font-family: "Roboto", sans-serif;
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -31,7 +32,7 @@
   font-size: 14px;
 }
 .form button {
-  font-family: "Roboto", sans-serif;
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   text-transform: uppercase;
   outline: 0;
   background: #4CAF50;
@@ -92,24 +93,33 @@
 .container .info span .fa {
   color: #EF3B3A;
 }
+.matcat{
+	width:200px; 
+	position:relative;
+	left:20%;
+	top:15%;
+}
 body {
-  background: #eb6421; /* fallback for old browsers */
+  background: #eb6421; 
   background: #eb6421;
   background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
-  font-family: "Roboto", sans-serif;
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
 </style>
 </head>
+<body>
 <div class="login-page">
+<img src="${pageContext.request.contextPath}/carrotmatcat_images/login.png" class="matcat">
   <div class="form">
     <form class="login-form" action="${pageContext.request.contextPath}/LoginController.do" method="post">
       <input type="text" name="memberId" placeholder="아이디" required="required">
       <input type="password" name="memberPassword" placeholder="패스워드" required="required">
       <button>로그인</button>
-      <p class="message">아직 회원이 아니신가요? <a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a></p>
+      <p class="message">아직 회원이 아니신가요? <a href="carrotmatcat_register_form.jsp">회원가입</a></p>
     </form>
   </div>
 </div>
+</body>
 
