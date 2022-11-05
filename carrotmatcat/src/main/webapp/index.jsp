@@ -15,16 +15,28 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<style type="text/css">
+img{
+position: relative;
+left:50%;
+}
 
+h1, h3{
+position: relative;
+left:50%;
+color:white;
+}
+</style>
 </head>
 <body style="background-color: orange">
 <div>
-<img src="carrotmatcat_images/index.jpg" style="width: 100vw">
+<br><br>
 <h3>당신 근처의 맛집을 캣치</h3>
 <h1>당근맛캣</h1>
 <a href="carrotmatcat_member/carrotmatcat_login_form.jsp">
-	<img src="carrotmatcat_images/matcat.png" style="width: 30vw"> 
+	<img src="carrotmatcat_images/matcat.png" style="width: 30%"> 
 </a>
+<a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a>
 </div>
 </body>
 </html>
