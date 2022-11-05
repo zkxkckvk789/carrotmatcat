@@ -45,7 +45,7 @@
 </table>
 <ul class="pagination justify-content-center" style="margin:20px 0">	
 	<c:if test="${requestScope.pagination.previousPageGroup}">	
-	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/SearchController.do?SearchController.do?searchCategory=${searchCategory}&searchContent=${searchContent}&pageNo=${requestScope.pagination.startPageOfPageGroup-1}">Previous</a></li>
+	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/SearchController.do?searchCategory=${searchCategory}&searchContent=${searchContent}&pageNo=${requestScope.pagination.startPageOfPageGroup-1}">Previous</a></li>
 	</c:if>
 	<c:forEach begin="${requestScope.pagination.startPageOfPageGroup}" end="${requestScope.pagination.endPageOfPageGroup}" var="page">
 		<c:choose>
