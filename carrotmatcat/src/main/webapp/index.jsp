@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>당근맛캣 Carrot Mat Cat</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -18,15 +17,14 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body>
-<div class="container pt-3">
+<body style="background-color: orange">
+<div>
+<img src="carrotmatcat_images/index.jpg" style="width: 100vw">
 <h3>당신 근처의 맛집을 캣치</h3>
 <h1>당근맛캣</h1>
-<a href="carrotmatcat_layout.jsp">
-	<img src="carrotmatcat_images/matcat.png"> 
+<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">
+	<img src="carrotmatcat_images/matcat.png" style="width: 30vw"> 
 </a>
-<a href="${pageContext.request.contextPath}/FindPostListController.do">확인</a>
-<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">로그인확인</a>
 </div>
 </body>
 </html>

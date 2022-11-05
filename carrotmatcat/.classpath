@@ -11,5 +11,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="src/main/webapp/carrotmatcat_images/matcat.png"/>
+	<classpathentry kind="lib" path="src/main/webapp/carrotmatcat_images/index.png"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
