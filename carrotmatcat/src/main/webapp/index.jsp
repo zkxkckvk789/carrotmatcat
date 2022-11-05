@@ -25,6 +25,7 @@
 <a href="carrotmatcat_layout.jsp">
 	<img src="carrotmatcat_images/matcat.png"> 
 </a>
+
 <a href="${pageContext.request.contextPath}/FindPostListController.do">확인</a>
 <a href="carrotmatcat_member/carrotmatcat_login_form.jsp">로그인확인</a>
 </div>

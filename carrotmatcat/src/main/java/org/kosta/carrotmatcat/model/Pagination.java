@@ -6,10 +6,18 @@ public class Pagination {
 	private int pageCountPerPageGroup=4; //페이지 그룹당 페이지수 
 	private int totalPostCount; //총게시물수 ( 데이터베이스에 저장되어 있는)
 	
+//	private String searchCategory=null;
+//	private String searchContent=null;
+	
 	public Pagination(int totalPostCount) {
 		this.totalPostCount=totalPostCount;
 	}
 	public Pagination(int totalPostCount,int nowPage) {
+		this.totalPostCount=totalPostCount;
+		this.nowPage=nowPage;
+	}
+	
+	public Pagination(int totalPostCount, int nowPage, String searchCategory, String searchContent) {
 		this.totalPostCount=totalPostCount;
 		this.nowPage=nowPage;
 	}
