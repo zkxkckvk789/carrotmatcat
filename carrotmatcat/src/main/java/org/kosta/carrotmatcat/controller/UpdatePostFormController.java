@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.carrotmatcat.model.BoardDAO;
+import org.kosta.carrotmatcat.model.MemberVO;
 import org.kosta.carrotmatcat.model.PostVO;
 
 public class UpdatePostFormController implements Controller {
@@ -13,16 +14,27 @@ public class UpdatePostFormController implements Controller {
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session=request.getSession(false);
-		Long articleNo=Long.parseLong(request.getParameter("articleNo"));
+		
+		
+//		if(session==null||session.getAttribute("postVO")==null||
+//				request.getMethod().equalsIgnoreCase("POST")==false){
+//			System.out.println("123haha");
+//			return "redirect:index.jsp";
+//		}
+		if(session==null) {
+			System.out.println("lala");
+		}
+		
+		long articleNo = Long.parseLong(request.getParameter("articleNo"));
+		System.out.println(articleNo);
 		PostVO postVO=BoardDAO.getInstance().viewPostDetailByNo(articleNo);
 		request.setAttribute("postVO", postVO);
+		postVO=(PostVO) session.getAttribute("postVO");
+		
+
 		
 		
-		
-		if(session==null||session.getAttribute("postVO")==null||
-				request.getMethod().equalsIgnoreCase("POST")==false){
-			return "redirect:index.jsp";
-		}
+		//PostVO postVO=(PostVO) session.getAttribute("memberVO");
 		
 		request.setAttribute("url","carrotmatcat_board/carrotmatcat_update_post_form.jsp");
 	      return "carrotmatcat_layout.jsp";
