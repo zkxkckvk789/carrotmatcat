@@ -120,22 +120,22 @@ ON cl.article_no=cb.article_no
 INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
 WHERE cl.member_id='yerin0110';
 
---이것도 가능하고
-SELECT ROW_NUMBER() OVER(ORDER BY cl.article_no DESC) AS rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
-FROM carrotmatcat_likes cl
-INNER JOIN (SELECT article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')
-AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board) cb
-ON cl.article_no=cb.article_no
-INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
-ORDER BY cb.article_no DESC;
-
---이것도 가능한데 뭐로 하지
+--수정후
 SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
 FROM carrotmatcat_board cb
 INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no 
 INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
 WHERE rnum BETWEEN 1 AND 5 AND cl.member_id='yerin0110'
 ORDER BY cb.article_no DESC;
+
+-- 내가 좋아요 누른 총 게시글 수(pagination에 필요)
+SELECT COUNT(*) FROM(
+SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
+FROM carrotmatcat_board cb
+INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no 
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
+WHERE cl.member_id='hasense9410'
+ORDER BY cb.article_no DESC);
 
 --조회수 증가
 UPDATE carrotmatcat_board SET article_hits=article_hits+1 WHERE article_no=1;
