@@ -26,7 +26,7 @@ public class UpdateMemberController implements Controller {
 		MemberDAO.getInstance().updateMember(memberVO);	
 		
 		//session.setAttribute("memberVO", memberVO);
-		return "redirect:HomeController.do";
+		return "redirect:mypage.jsp";
 	}
 
 }
