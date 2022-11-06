@@ -9,5 +9,4 @@ public class HomeController implements Controller {
 		request.setAttribute("url","carrotmatcat_member/carrotmatcat_login_success.jsp");
 		return "carrotmatcat_layout.jsp";
 	}
-
 }

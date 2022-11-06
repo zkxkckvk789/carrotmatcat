@@ -17,7 +17,7 @@
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfCafeAndDessertController.do">카페/디저트</a></li>
 		                        </ul>   
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#services">오늘 뭐 먹지?</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/RecommandStoreByLikesUsingRandomFormController.do">오늘 뭐 먹지?</a></li>
                         <c:choose>
                         	<c:when test="${sessionScope.memberVO==null}">
                        			<li class="nav-item"><a class="nav-link" href="carrotmatcat_member/carrotmatcat_login_form.jsp" >로그인</a></li>
