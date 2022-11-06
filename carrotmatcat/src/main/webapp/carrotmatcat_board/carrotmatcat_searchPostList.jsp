@@ -2,17 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h3></h3> <%-- 선택한 카테고리 이름 자리--%>
+<br>
+<div class="search">
 <form action="${pageContext.request.contextPath}/SearchController.do" method="get">
-	<select name="searchCategory">
+	<select name="searchCategory" style="color: white; background-color: orange; border: 4px solid orange; border-radius: 50px;">
 		<option value="제목">제목</option>
 		<option value="내용">내용</option>
 	</select>
-	<input type="text" name="searchContent" required="required">
-	<button type="submit">검색</button>
+	<input type="text" name="searchContent" required="required" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">
+	<button type="submit" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">검색</button>
 </form>
+</div>
+<br><br>
+<div class="col-sm-10 offset-sm-1">
 <table class="table table-hover boardlist">
-	<thead>
-		<tr>
+	<thead style="text-align:center">
+		<tr style="background-color: white">
 			<th>글번호</th>
 			<th>제목</th>
 			<th>가게 이름</th>
@@ -21,7 +26,7 @@
 			<th>조회수</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody style="background-color: white; text-align:center">
 		<c:forEach items="${requestScope.postList}" var="post">
 			<tr>
 				<td>${post.articleNo}</td>
@@ -43,6 +48,13 @@
 		</c:forEach>
 	</tbody>
 </table>
+</div>
+<c:if test="${sessionScope.memberVO!=null}">
+<span class="write">
+	<a href="${pageContext.request.contextPath}/WritePostFormController.do">글쓰기</a>
+</span>
+<br>
+</c:if>
 <ul class="pagination justify-content-center" style="margin:20px 0">	
 	<c:if test="${requestScope.pagination.previousPageGroup}">	
 	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/SearchController.do?searchCategory=${searchCategory}&searchContent=${searchContent}&pageNo=${requestScope.pagination.startPageOfPageGroup-1}">Previous</a></li>
@@ -61,9 +73,6 @@
   	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/SearchController.do?searchCategory=${searchCategory}&searchContent=${searchContent}&pageNo=${requestScope.pagination.endPageOfPageGroup+1}">Next</a></li>     
 	</c:if>
 </ul>
-<c:if test="${sessionScope.memberVO!=null}">
-	<a href="${pageContext.request.contextPath}/WritePostFormController.do">글쓰기</a>
-</c:if>
 
 
 

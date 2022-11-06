@@ -16,33 +16,31 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
-img {
-	position: relative;
-	left: 50%;
+.container{
+height: 100vh;
 }
 
-h1, h3 {
-	position: relative;
-	left: 50%;
-	color: white;
+.matcat{
+ position: absolute;
+  width: 80%;
+}
+
+body{
+background-color: #eb6421;
 }
 </style>
 </head>
-<body style="background-color: orange">
-	<div>
-		<br>
-		<br>
-		<h3>당신 근처의 맛집을 캣치</h3>
-		<h1>당근맛캣</h1>
+<body>
+	<div class="container">
 		<c:choose>
 			<c:when test="${sessionScope.memberVO==null}">
-				<a href="carrotmatcat_member/carrotmatcat_login_form.jsp"> <img
-					src="carrotmatcat_images/matcat.png" style="width: 30%">
+				<a href="carrotmatcat_member/carrotmatcat_login_form.jsp"> 
+				<img src="carrotmatcat_images/indexVer2.png" class="matcat">
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/HomeController.do"> <img
-					src="carrotmatcat_images/matcat.png" style="width: 30%">
+				<a href="${pageContext.request.contextPath}/HomeController.do"> 
+					<img src="carrotmatcat_images/indexVer2.png" class="matcat">
 				</a>
 			</c:otherwise>
 		</c:choose>
