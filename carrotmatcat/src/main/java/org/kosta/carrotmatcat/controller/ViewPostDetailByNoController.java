@@ -12,6 +12,7 @@ import org.kosta.carrotmatcat.model.CommentVO;
 public class ViewPostDetailByNoController implements Controller{
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(request.getParameter("articleNo"));
 		long articleNo = Long.parseLong(request.getParameter("articleNo"));
 		
 		System.out.println("12345");

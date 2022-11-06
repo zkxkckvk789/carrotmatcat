@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container pt-3">
 			<form>
-				<input type="hidden" name="articleNo" value="${postDetailView.articleNo}">
+				<input type="hidden" id="articleNo" name="articleNo" value="${postDetailView.articleNo}">
 			</form>
 		<table class="table table ">
 		<thead>
@@ -64,59 +64,109 @@
 		</table>
 	</div>
 
-		<div class="CommentBox">
-			<div class="comment_option">
-				<h3 class="comment_title">댓글</h3>
-			</div>
-			<ul class="comment_list">
-				<c:forEach items="${commentList}" var="clist">
-					<li  class="CommentItem CommentItem--mine"><div class="comment_area"></div>
-							<div class="comment_box">
-									<div class="comment_nick_info">
-										<a href="#" role="button" class="comment_nickname"> ${clist.memberVO.getMemberNickname() } </a>
-									</div>
-								<div class="comment_text_box">
-									<p class="comment_text_view">
-										<span class="text_comment"></span>
-										<c:choose>
-											<c:when test="${sessionScope.memberVO==clist.memberVO.getMemberNickname()}">
-												<a href="#">댓글 삭제</a>
-												<a href="#">댓글 수정</a>
-											</c:when>
-											<c:otherwise>
-												<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${clist.commentContent}</a>
-											</c:otherwise>
-										</c:choose>
-										<br><span class="comment_info_date">${clist.commentTimePosted }</span>
-									</p>
-									</div>
-						</div></li>
-				</c:forEach>
-			</ul>
-			<div class="CommentWriter">
-				<div  class="comment_inbox">
-					<form  method="post" onsubmit="insertCommentForm()">
-						<em class="comment_inbox_name">${memberVO.getMemberNickname()}</em>
-					<textarea id="commentContent" name="commentContent" placeholder="댓글을 남겨보세요" rows="1" class="comment_inbox_text" style="overflow: hidden; overflow-wrap: break-word; height: 14px;"></textarea>
-					<button name="commentbtn" id="commentbtn">등록</button>
-					</form>
+<div class="CommentBox">
+	<div class="comment_option">
+		<h3 class="comment_title">댓글</h3>
+	</div>
+	<ul class="comment_list">
+		<c:forEach items="${commentList}" var="clist">
+			<li class="CommentItem CommentItem--mine">
+				<div class="comment_area"></div>
+				<div class="comment_box">
+					<div class="comment_nick_info">
+						<a href="#" role="button" class="comment_nickname"
+							id="comment_nickname"> ${clist.memberVO.getMemberNickname() }
+						</a>
+					</div>
+					<div class="comment_text_box">
+						<p class="comment_text_view">
+							<span class="text_comment"></span>
+							<c:choose>
+								<c:when
+									test="${sessionScope.memberVO.getMemberNickname()==clist.memberVO.getMemberNickname()}">
+
+									<form id="modifyCommentForm"
+										action="UpdateCommentController.do" method="post">
+										<input type="hidden" name="commentNo"
+											value="${clist.commentNo}">
+									</form>
+									<form id="deleteCommentForm"
+										action="DeleteCommentController.do" method="post">
+										<input type="hidden" name="commentNo"
+											value="${clist.commentNo}">
+									</form>
+									<button type="button" onclick="updateComment()"
+										style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글
+										수정</button>
+									<button type="button" onclick="deleteComment()"
+										style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글
+										삭제</button>
+									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${clist.commentContent}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${clist.commentContent}</a>
+								</c:otherwise>
+							</c:choose>
+							<br> <span class="comment_info_date">${clist.commentTimePosted }</span>
+						</p>
+					</div>
 				</div>
-			</div>
+			</li>
+		</c:forEach>
+	</ul>
+	<div class="CommentWriter">
+		<div class="comment_inbox">
+			<em class="comment_inbox_name" id="comment_inbox_name">${memberVO.getMemberNickname()}</em>
+
+			<input type="text" id="commentContent"
+				name="${sessionScope.memberVO.getMemberNickname() }"
+				placeholder="댓글을 남겨보세요" class="comment_inbox_text"
+				style="overflow: hidden; overflow-wrap: break-word;" />
+			<button name="commentbtn" id="commentbtn" onclick="insertComment()">등록</button>
+			<input id="member_id" type="hidden"
+				value="${sessionScope.memberVO.getMemberId() }" />
 		</div>
-	<script type="text/javascript">
-		console.log(commentContent);
-		function insertCommentForm(){
-			let commentContent=document.getElementById("commentContent").innerHTML;
-			let xhr=new XMLHttpRequest();
-			xhr.onreadystatechange=function(){
-				if(xhr.readyState==4&&xhr.status==200){
-					
-				
+	</div>
+</div>
+
+</body>
+</html>
+									
+
+<script type="text/javascript">
+	function insertComment() {
+		let articleNo = document.getElementById("articleNo").value;
+		let memberNickname = document.getElementById("comment_inbox_name").innerHTML;
+		let commentContent = document.getElementById("commentContent").value;
+		console.log(articleNo, memberNickname,commentContent);
+		let memberId = document.getElementById("member_id").value;
+		
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				if(xhr.responseText=="ok") {
+					window.location.reload();
 				}
+			}
 		}
-			action="${pageContext.request.contextPath}/WriteCommentController.do"
-			xhr.open("get","${pageContext.request.contextPath}/WriteCommentController.do?memberNickname="+memberVO.getMemberNickname()+"&");
-			xhr.send();
-	</script>
+			xhr.open("post","${pageContext.request.contextPath}/WriteCommentController.do", true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
+			xhr.send("articleNo="+articleNo+ "&memberNickname="+memberNickname+"&commentContent="+commentContent+"&memberId="+memberId);
+	}
+			function deleteComment() {
+				let result = confirm("삭제 하시겠습니까?");
+				if (result) {
+					document.getElementById("deleteCommentForm")
+							.submit();
+				}
+			}
+			function updateComment() {
+				let result = confirm("수정 하시겠습니까?");
+				if (result) {
+					document.getElementById("modifyCommentForm")
+							.submit();
+				}
+			}
+</script>
 </body>
 </html>
