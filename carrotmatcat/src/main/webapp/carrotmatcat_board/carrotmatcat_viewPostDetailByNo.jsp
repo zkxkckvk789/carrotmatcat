@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container pt-3">
-<<<<<<< HEAD
+
 			<form>
 				<input type="hidden" name="articleNo" value="${postDetailView.articleNo}">
 			</form>
@@ -28,7 +28,7 @@
 				test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
 				<tr>
 					<td colspan="5" class="text-center">
-						<form id="modifyForm" action="UpdatePostController.do"
+						<form id="modifyForm" action="UpdatePostFormController.do"
 							method="post">
 							<input type="hidden" name="no"
 								value="${postDetailView.articleNo}">
@@ -57,7 +57,7 @@
 							}
 						</script>
 						</div>
-=======
+
 		<div class="article_content">
 			<table class="table">
 				<td>제목 ${postDetailView.articleTitle}</td>
@@ -74,21 +74,21 @@
 								tip:pre tag 라인은 행변경 없이 한라인으로 표현해야한다.
 						 --%> <font size="4"><pre>${postDetailView.articleContent}</pre></font>
 
->>>>>>> refs/heads/controller-board-RegisterMember2-kyr1105
+
 					</td>
 				</tr>
-<<<<<<< HEAD
+
 			</c:if>
 			</tbody>
 		</table>
 	</div>
-=======
+
 
 				<c:if
 					test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
 					<tr>
 						<td colspan="5" class="text-center">
-							<form id="modifyForm" action="UpdatePostController.do"
+							<form id="modifyForm" action="UpdatePostFormController.do"
 								method="post">
 								<input type="hidden" name="no"
 									value="${postDetailView.articleNo}">
