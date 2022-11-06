@@ -11,7 +11,8 @@
 			<th class="no">${postDetailView.articleFoodCategory}</th>
 		</tr>
 		<tr style="font-size: 1.1em; color: #aac414; background-color: white;">
-			<th style="width: 70%">${postDetailView.articleTitle}</th>
+			<th style="width: 40%">${postDetailView.articleTitle}</th>
+			<th style="width: 30%">${postDetailView.articleStoreName}</th>
 			<th style="width: 10%">${postDetailView.memberVO.memberNickname}</th>
 			<th>${postDetailView.articleTimePosted}</th>
 			<th>조회수 ${postDetailView.articleHits}</th>
