@@ -27,7 +27,7 @@
 				test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
 				<tr>
 					<td colspan="5" class="text-center">
-						<form id="modifyForm" action="UpdatePostController.do"
+						<form id="modifyForm" action="UpdatePostFormController.do"
 							method="post">
 							<input type="hidden" name="articleNo"
 								value="${postDetailView.articleNo}">

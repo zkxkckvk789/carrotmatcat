@@ -13,6 +13,8 @@ public class ViewPostDetailByNoController implements Controller{
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		long articleNo = Long.parseLong(request.getParameter("articleNo"));
+		
+		System.out.println("12345");
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		ArrayList<CommentVO> commentList= commentDAO.viewCommentDetail(articleNo);
 		

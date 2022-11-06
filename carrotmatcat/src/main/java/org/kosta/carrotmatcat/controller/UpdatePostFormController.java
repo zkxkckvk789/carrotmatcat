@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.carrotmatcat.model.BoardDAO;
-import org.kosta.carrotmatcat.model.MemberVO;
 import org.kosta.carrotmatcat.model.PostVO;
 
 public class UpdatePostFormController implements Controller {
@@ -22,14 +21,11 @@ public class UpdatePostFormController implements Controller {
 //			return "redirect:index.jsp";
 //		}
 		if(session==null) {
-			System.out.println("lala");
 		}
 		
 		long articleNo = Long.parseLong(request.getParameter("articleNo"));
-		System.out.println(articleNo);
 		PostVO postVO=BoardDAO.getInstance().viewPostDetailByNo(articleNo);
 		request.setAttribute("postVO", postVO);
-		postVO=(PostVO) session.getAttribute("postVO");
 		
 
 		
