@@ -3,11 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form method="post" action="UpdatePostController.do">
 
-	<input type="hidden" name="no" value="${{requestScope.postVO.articleNo}">
+	<input type="hidden" name="no" value="${requestScope.post.articleNo}">
 	<table class="table">
 		<tr>
 			<td>
-			<input type="text" value="${{requestScope.postVO.articleTitle}" name="title"
+			<input type="text" value="${requestScope.postVO.articleTitle}" name="title"
 				placeholder="글제목" required="required">
 			<input type="text" value="${requestScope.postVO.articlestoreName }" name="title"
 				placeholder="가게이름" required="required">

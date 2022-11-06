@@ -13,15 +13,16 @@ public class UpdatePostFormController implements Controller {
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session=request.getSession(false);
-		/*
-		if(session==null||session.getAttribute("postVO")==null||
-				request.getMethod().equals("POST")==false){
-			return "redirect:index.jsp";
-		}
-		*/
 		Long articleNo=Long.parseLong(request.getParameter("articleNo"));
 		PostVO postVO=BoardDAO.getInstance().viewPostDetailByNo(articleNo);
 		request.setAttribute("postVO", postVO);
+		
+		
+		
+		if(session==null||session.getAttribute("postVO")==null||
+				request.getMethod().equalsIgnoreCase("POST")==false){
+			return "redirect:index.jsp";
+		}
 		
 		request.setAttribute("url","carrotmatcat_board/carrotmatcat_update_post_form.jsp");
 	      return "carrotmatcat_layout.jsp";
