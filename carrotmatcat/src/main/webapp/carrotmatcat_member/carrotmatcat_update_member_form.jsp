@@ -15,9 +15,9 @@
 <body>
 <div class="container pt-3">
 <form action="UpdateMemberController.do" method="post">
-			<input type="text" name="memberId" required="required"  value="${sessionScope.memberVO.memberId}"  readonly="readonly"><br>
-			<input type="password" name="memberPassword" required="required"	 value="${sessionScope.memberVO.memberPassword}"><br>
-			<input type="text" name="memberNickname" required="required"	 value="${sessionScope.memberVO.memberNickname}"><br>
+			<input type="text" name="memberId" required="required"  value="${sessionScope.memberVO.memberId}"  readonly="readonly"	><br>
+			<input type="password" name="memberPassword" placeholder = "패스워드" required="required"	 value="${sessionScope.memberVO.memberPassword}"><br>
+			<input type="text" name="memberNickname"   required="required"	 value="${sessionScope.memberVO.memberNickname}"><br>
 			
 			<button type="submit">회원정보수정</button>
 		</form>
