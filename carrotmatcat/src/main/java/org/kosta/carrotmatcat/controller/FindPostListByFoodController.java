@@ -20,7 +20,7 @@ public class FindPostListByFoodController implements Controller {
 		
 		if (request.getParameter("koreanFood").equals("한식")) {
 			
-		}
+		} 
 		
 		return null;
 	}
