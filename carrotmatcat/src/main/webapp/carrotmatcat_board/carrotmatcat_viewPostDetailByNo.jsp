@@ -27,7 +27,7 @@
 				test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
 				<tr>
 					<td colspan="5" class="text-center">
-						<form id="modifyForm" action="UpdatePostController.do"
+						<form id="modifyForm" action="UpdatePostFormController.do"
 							method="post">
 							<input type="hidden" name="no"
 								value="${postDetailView.articleNo}">
@@ -55,14 +55,84 @@
 								}
 							}
 						</script>
+<<<<<<< HEAD
 						</div>
-					</td>
+
+		<div class="article_content">
+			<table class="table">
+				<td>제목 ${postDetailView.articleTitle}</td>
+				<tr>
+					<td>글번호 ${postDetailView.articleNo}</td>
+
+					<td>작성자 ${postDetailView.memberVO.memberNickname}</td>
+					<td>조회수 ${postDetailView.articleHits}</td>
+					<td>${postDetailView.articleTimePosted}</td>
 				</tr>
+				<tr>
+					<td colspan="5">
+						<%-- html pre tag : db에 저장된 글형식 그대로 표현,
+								tip:pre tag 라인은 행변경 없이 한라인으로 표현해야한다.
+						 --%> <font size="4"><pre>${postDetailView.articleContent}</pre></font>
+
+
+=======
+						</div>
+>>>>>>> refs/heads/view-JSP3-lhy1105
+					</td>
+<<<<<<< HEAD
+				</tr>
+
+=======
+				</tr>
+>>>>>>> refs/heads/view-JSP3-lhy1105
 			</c:if>
 			</tbody>
 		</table>
 	</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/view-JSP3-lhy1105
+
+<<<<<<< HEAD
+				<c:if
+					test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
+					<tr>
+						<td colspan="5" class="text-center">
+							<form id="modifyForm" action="UpdatePostFormController.do"
+								method="post">
+								<input type="hidden" name="no"
+									value="${postDetailView.articleNo}">
+							</form>
+							<form id="deleteForm" action="DeletePostController.do"
+								method="post">
+								<input type="hidden" name="no"
+									value="${postDetailView.articleNo}">
+							</form>
+							<button type="button" onclick="updatePostByNo()">수정</button>
+							<button type="button" onclick="deletePostByNo()">삭제</button> <script>
+								function deletePostByNo() {
+									let result = confirm("삭제 하시겠습니까?");
+									if (result) {
+										document.getElementById("deleteForm")
+												.submit();
+									}
+								}
+								function updatePostByNo() {
+									let result = confirm("수정 하시겠습니까?");
+									if (result) {
+										document.getElementById("modifyForm")
+												.submit();
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</c:if>
+			</table>
+		</div>
+=======
+>>>>>>> refs/heads/view-JSP3-lhy1105
 		<div class="CommentBox">
 			<div class="comment_option">
 				<h3 class="comment_title">댓글</h3>
