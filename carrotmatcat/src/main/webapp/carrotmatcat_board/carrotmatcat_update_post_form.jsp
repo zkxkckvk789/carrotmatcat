@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<form method="post" action="UpdatePostController.do">
+<form method="post" action="UpdatePostFormController.do">
 
 	<input type="hidden" name="no" value="${requestScope.post.articleNo}">
 	<table class="table">
@@ -9,7 +9,7 @@
 			<td>
 			<input type="text" value="${requestScope.postVO.articleTitle}" name="title"
 				placeholder="글제목" required="required">
-			<input type="text" value="${requestScope.postVO.articlestoreName }" name="title"
+			<input type="text" value="${requestScope.postVO.articleStoreName }" name="title"
 				placeholder="가게이름" required="required">
 			<input type="text" value="${requestScope.postVO.articleFoodCategory }" name="title"
 				placeholder="종류" required="required">

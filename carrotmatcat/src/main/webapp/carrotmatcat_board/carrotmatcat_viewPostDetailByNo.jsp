@@ -30,12 +30,12 @@
 					<td colspan="5" class="text-center">
 						<form id="modifyForm" action="UpdatePostFormController.do"
 							method="post">
-							<input type="hidden" name="no"
+							<input type="hidden" name="articleNo"
 								value="${postDetailView.articleNo}">
 						</form>
 						<form id="deleteForm" action="DeletePostController.do"
 							method="post">
-							<input type="hidden" name="no"
+							<input type="hidden" name="articleNo"
 								value="${postDetailView.articleNo}">
 						</form>
 						<div>
