@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="carrotmatcat.jpg" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>당근맛캣 Carrot Mat Cat</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">

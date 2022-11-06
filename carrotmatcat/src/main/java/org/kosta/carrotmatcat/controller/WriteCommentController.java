@@ -11,14 +11,9 @@ import org.kosta.carrotmatcat.model.PostVO;
 public class WriteCommentController implements Controller{
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("12345");
-		
 		String commentContent = request.getParameter("commentContent");
-		
 		long articleNo = Long.parseLong(request.getParameter("articleNo"));
-		
 		String memberId = request.getParameter("memberId");
-		System.out.println(commentContent + articleNo + memberId);
 		CommentVO commentVO = new CommentVO();
 		commentVO.setCommentContent(commentContent);
 		commentVO.setMemberVO(new MemberVO(memberId));

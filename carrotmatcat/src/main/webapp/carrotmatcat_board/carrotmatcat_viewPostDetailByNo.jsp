@@ -87,7 +87,7 @@
 
 									<form id="modifyCommentForm"
 										action="UpdateCommentController.do" method="post">
-										<input type="hidden" name="commentNo"
+										<input type="hidden" name="commentNo" id="commentNo"
 											value="${clist.commentNo}">
 									</form>
 									<form id="deleteCommentForm"
@@ -95,16 +95,17 @@
 										<input type="hidden" name="commentNo"
 											value="${clist.commentNo}">
 									</form>
+									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp" id="commentContent">${clist.commentContent}</a><br>
 									<button type="button" onclick="updateComment()"
 										style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글
 										수정</button>
 									<button type="button" onclick="deleteComment()"
 										style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글
 										삭제</button>
-									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${clist.commentContent}</a>
+									
 								</c:when>
 								<c:otherwise>
-									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${clist.commentContent}</a>
+									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp" id="commentContent">${clist.commentContent}</a>
 								</c:otherwise>
 							</c:choose>
 							<br> <span class="comment_info_date">${clist.commentTimePosted }</span>
@@ -128,10 +129,8 @@
 		</div>
 	</div>
 </div>
-
 </body>
 </html>
-									
 
 <script type="text/javascript">
 	function insertComment() {
@@ -156,17 +155,49 @@
 			function deleteComment() {
 				let result = confirm("삭제 하시겠습니까?");
 				if (result) {
-					document.getElementById("deleteCommentForm")
-							.submit();
+					deleteCommentByResult();
 				}
 			}
+			
+			function deleteCommentByResult(){
+				let commentNo = document.getElementById("commentNo").value;
+				console.log(commentNo);				
+				let xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
+					alert(xhr.readyState + " "+xhr.status)
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						if(xhr.responseText=="ok") {
+							window.location.reload();
+						}
+					}
+			}
+				xhr.open("post","${pageContext.request.contextPath}/DeleteCommentController.do", true);
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
+				xhr.send("commentNo="+commentNo);
+		}
 			function updateComment() {
 				let result = confirm("수정 하시겠습니까?");
 				if (result) {
-					document.getElementById("modifyCommentForm")
-							.submit();
+					updateCommentByResult();
 				}
 			}
+		
+			function updateCommentByResult(){
+				let commentNo = document.getElementById("commentNo").value;
+				let commentContent = document.getElementById("commentContent").innerHTML;
+				alert(commentContent);
+
+				let xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
+					if (xhr.readyState == 4 && xhr.status == 200) {
+							alert(xhr.responseText);
+							window.location.reload();
+					}
+			}
+				xhr.open("post","${pageContext.request.contextPath}/UpdateCommentFormController.do", true);
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
+				xhr.send("commentNo="+commentNo+"&commentContent="+commentContent);
+		}
 </script>
 </body>
 </html>
