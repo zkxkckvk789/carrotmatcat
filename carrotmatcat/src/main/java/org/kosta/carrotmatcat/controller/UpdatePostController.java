@@ -20,22 +20,29 @@ public class UpdatePostController implements Controller {
          
          //PostVO postVO=(PostVO) session.getAttribute("postVO");
          
+	   String articleNo=request.getParameter("articleNo");
          String articleTitle=request.getParameter("articleTitle");
          String articleStoreName=request.getParameter("articleStoreName");
          String articleFoodCategory=request.getParameter("articleFoodCategory");
-         String aticleContent=request.getParameter("ArticleContent");
-         String aticleNo=request.getParameter("ArticleNo");
+         String articleContent=request.getParameter("articleContent");
  
          PostVO postVO=new PostVO();
          postVO.setArticleTitle(articleTitle);
          postVO.setArticleStoreName(articleStoreName);
          postVO.setArticleFoodCategory(articleFoodCategory);
-         postVO.setArticleContent(aticleContent);
-         postVO.setArticleNo(Long.parseLong(aticleNo));
+         postVO.setArticleContent(articleContent);
+         postVO.setArticleNo(Long.parseLong(articleNo));
          
-         request.setAttribute("postVO", postVO);
+         
+         System.out.println(postVO);
          BoardDAO.getInstance().updatePost(postVO);
-         request.setAttribute("url", "carrotmatcat_board/carrotmatcat_viewPostDetailByNo.jsp");
-         return "redirect:carrotmatcat_layout";
+         request.setAttribute("postVO", postVO);
+         
+       
+         //request.setAttribute("url","ViewPostDetailByNoController.do?articleNo=40");
+         //return "redirect:carrotmatcat_layout.jsp";
+         String path="redirect:ViewPostDetailByNoController.do?articleNo="+postVO.getArticleNo();
+         
+         return path;
       }
    }
