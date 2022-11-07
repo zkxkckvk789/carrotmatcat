@@ -64,11 +64,21 @@ DELETE FROM carrotmatcat_board WHERE article_no=2;
 SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category
 FROM(
 SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS') 
-AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board WHERE article_food_category='양식'
 ) cb
 INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
-WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?
+WHERE rnum BETWEEN 1 AND 5
 ORDER BY cb.article_no DESC;
+
+--음식종류별 총 게시글 수(페이지네이션에 필요)
+SELECT COUNT(*) FROM(
+SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS') 
+AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board WHERE article_food_category='양식'
+) cb
+INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id
+ORDER BY cb.article_no DESC);
 
 --제목으로 검색한 목록조회
 SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category

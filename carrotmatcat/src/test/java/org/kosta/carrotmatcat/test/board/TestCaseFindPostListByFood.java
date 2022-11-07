@@ -9,7 +9,7 @@ import org.kosta.carrotmatcat.model.PostVO;
 
 public class TestCaseFindPostListByFood {
 	public static void main(String[] args) {
-		String articleFoodCategory="한식";
+		String articleFoodCategory="양식";
 		try {
 			Pagination pagination=new Pagination(BoardDAO.getInstance().getTotalPostCount(), 2);
 			ArrayList<PostVO>list = BoardDAO.getInstance().findPostListByFood(articleFoodCategory, pagination);
