@@ -11,7 +11,7 @@ public class TestCaseFindPostListByLike {
 	public static void main(String[] args) {
 		String memberId="yerin0110";
 		try {
-			Pagination p=new Pagination(BoardDAO.getInstance().getTotalPostCount(),1);
+			Pagination p=new Pagination(BoardDAO.getInstance().getTotalPostCountByLikes(memberId),1);
 			ArrayList<PostVO>list=BoardDAO.getInstance().findLikesListPostByMemberId(memberId,p);
 			for(PostVO postVO:list) {
 				System.out.println(postVO);

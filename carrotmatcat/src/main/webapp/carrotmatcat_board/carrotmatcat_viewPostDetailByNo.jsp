@@ -111,7 +111,8 @@ ul{
 						</form>
 						<div>
 						<button type="button" onclick="updatePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">수정</button>
-						<button type="button" onclick="deletePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">삭제</button> <script>
+						<button type="button" onclick="deletePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">삭제</button> 
+						<script>
 							function deletePostByNo() {
 								let result = confirm("삭제 하시겠습니까?");
 								if (result) {
