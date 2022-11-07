@@ -30,7 +30,7 @@ public class LikesDAO {
 		}
 	}
 	
-	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
+	public void closeAll(Connection con, PreparedStatement pstmt, ResultSet rs) throws SQLException {
 		if(rs!=null) {
 			rs.close();
 		}
@@ -82,10 +82,35 @@ public class LikesDAO {
 				totalLikeCount=rs.getLong(1);
 			}
 		}finally {
-			closeAll(rs,pstmt,con);
+			closeAll(con, pstmt, rs);
 		}
 		return totalLikeCount;
 	}
 	
+	public PostVO check(String memberId, long articleNo) throws SQLException {
+		PostVO postVO=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT article_no FROM carrotmatcat_likes ");
+			sql.append("WHERE member_id=? AND post_no=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, memberId);
+			pstmt.setLong(2, articleNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				postVO = new PostVO();
+				postVO.setArticleNo(Long.parseLong(rs.getString(1)));
+				
+			}
+		}finally {
+			closeAll(con, pstmt, rs);
+		}
+		return postVO;
+
+	}
 	
 }

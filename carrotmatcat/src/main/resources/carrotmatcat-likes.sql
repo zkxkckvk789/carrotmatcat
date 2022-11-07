@@ -7,7 +7,7 @@ CREATE TABLE carrotmatcat_likes(
 )
 
 -- 좋아요 추가
-INSERT INTO carrotmatcat_likes VALUES(1, 'yerin0110');
+INSERT INTO carrotmatcat_likes VALUES(110, 'yerin0110');
 INSERT INTO carrotmatcat_likes VALUES(6, 'yerin0110');
 INSERT INTO carrotmatcat_likes VALUES(9, 'yerin0110');
 
@@ -28,7 +28,8 @@ WHERE cl.member_id='yerin0110';
 --총 좋아요 수 조회
 SELECT COUNT(*) FROM carrotmatcat_likes WHERE article_no=1;
 
-
+SELECT article_no FROM carrotmatcat_likes
+WHERE member_id='yerin0110' AND article_no=110;
 
 SELECT * FROM carrotmatcat_likes;
 
