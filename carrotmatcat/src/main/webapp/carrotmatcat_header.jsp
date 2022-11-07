@@ -8,6 +8,7 @@
                 <div class="navbar" id="navbarResponsive" style="">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item">
+<<<<<<< HEAD
                         	<a class="nav-link" href="${pageContext.request.contextPath}/FindPostListController.do"><i>맛집게시판</i></a>
 		                        <ul class="navbar__menu">
 			                        	<li  style="list-style: none;"><a class="nav-link" href="FindPostListByFoodOfKoreanController.do" >한식</a></li>
@@ -15,6 +16,15 @@
 			                        	<li  style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfChineseController.do">중식</a></li>
 			                        	<li  style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfWesternController.do">양식</a></li>
 			                        	<li  style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfCafeAndDessertController.do">카페/디저트</a></li>
+=======
+                        	<a class="nav-link" href="${pageContext.request.contextPath}/FindPostListController.do">맛집게시판</a>
+		                        <ul class="nav-item" style="text-align: center;">
+			                        	<li class="nav-item" style="list-style: none;"><a class="nav-link" href="${pageContext.request.contextPath}/FindPostListByFoodOfKoreanController.do" >한식</a></li>
+			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfJapaneseController.do">일식</a></li>
+			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfChineseController.do">중식</a></li>
+			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfWesternController.do">양식</a></li>
+			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfCafeAndDessertController.do">카페/디저트</a></li>
+>>>>>>> refs/heads/controller-FindPostListByFoodController-ces1107
 		                        </ul>   
                         </li>
                         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/RecommandStoreByLikesUsingRandomFormController.do">오늘 뭐 먹지?</a></li>
