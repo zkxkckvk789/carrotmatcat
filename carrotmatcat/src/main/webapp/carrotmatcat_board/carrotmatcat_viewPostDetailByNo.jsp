@@ -195,10 +195,12 @@ ul{
 				placeholder="댓글을 남겨보세요" class="comment_inbox_text"
 				style="overflow: hidden; overflow-wrap: break-word;" />
 			<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning">등록</button>
-			<input id="member_id" type="hidden"
-				value="${sessionScope.memberVO.getMemberId() }" />
+			<input id="member_id" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
 		</div>
 	</div>
+	<%--<a href="${pageContext.request.contextPath}/FindPostListController.do?pageNo=${requestScope.pageNo}">목록</a> --%>
+	<a href="javascript:history.back();">목록</a>
+	
 </div>
 	</div>
 
