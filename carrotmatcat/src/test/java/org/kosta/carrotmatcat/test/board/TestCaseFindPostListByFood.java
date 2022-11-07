@@ -11,7 +11,7 @@ public class TestCaseFindPostListByFood {
 	public static void main(String[] args) {
 		String articleFoodCategory="한식";
 		try {
-			Pagination pagination=new Pagination(BoardDAO.getInstance().getTotalPostCount(),2);
+			Pagination pagination=new Pagination(BoardDAO.getInstance().getTotalPostCount(), 2);
 			ArrayList<PostVO>list = BoardDAO.getInstance().findPostListByFood(articleFoodCategory, pagination);
 			for(PostVO postVO:list) {
 				System.out.println(postVO);
@@ -21,3 +21,4 @@ public class TestCaseFindPostListByFood {
 		}
 	}
 }
+

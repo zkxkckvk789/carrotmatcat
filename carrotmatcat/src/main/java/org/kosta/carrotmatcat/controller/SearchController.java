@@ -36,7 +36,6 @@ public class SearchController implements Controller {
 			request.setAttribute("postList", BoardDAO.getInstance().searchStoreListByContent(request.getParameter("searchContent"),pagination));
 		}
 		
-		
 		request.setAttribute("pagination", pagination);
 		request.setAttribute("searchCategory", searchCategory);
 		request.setAttribute("searchContent", searchContent);
