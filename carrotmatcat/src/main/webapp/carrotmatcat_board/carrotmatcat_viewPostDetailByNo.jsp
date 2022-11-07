@@ -54,7 +54,7 @@ ul{
 		</tr>
 		<tr style="font-size: 1.1em; color: #aac414; background-color: white;">
 			<th style="width: 40%">${postDetailView.articleTitle}</th>
-			<th style="width: 30%">${postDetailView.articleStoreName}</th>
+			<th style="width: 20%">${postDetailView.articleStoreName}</th>
 			<th style="width: 10%">${postDetailView.memberVO.memberNickname}</th>
 			<th>${postDetailView.articleTimePosted}</th>
 			<th>조회수 ${postDetailView.articleHits}</th>
@@ -64,13 +64,10 @@ ul{
 					<input type="hidden" id="articleNo" value="${requestScope.postVO.articleNo }">
 					<span id="likeView">
 					<c:choose>
-						<c:when test="${requestScope.postVO==null}">
-							<!--  <a><img onclick="like(false)" src="carrotmatcat_imgaes/no.png"  ></a>-->
-							<input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)">
-							<!-- <input type="button" value="좋아요!" onclick="return like()"> -->
+						<c:when test="${requestScope.postVO==null}">		
+							<input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)" style="width:30px;">
 						</c:when>
 						<c:otherwise>
-							<!-- <a><img onclick="like(true)" src="carrotmatcat_imgaes/yes.png"  ></a> -->
 							<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)">
 						</c:otherwise>
 					</c:choose>
@@ -82,9 +79,7 @@ ul{
 					<span>${requestScope.articleLikesCount }</span>
 				</c:otherwise> 			
 			</c:choose>
-			
-			
-			
+
 			</th>
 		</tr>
 	</thead>
@@ -94,8 +89,7 @@ ul{
 					<font size="4"><pre>${postDetailView.articleContent}</pre></font>
 				</td>
 			</tr>
-			<c:if
-				test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
+			<c:if test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
 				<tr>
 					<td colspan="5" class="text-center">
 						<form id="modifyForm" action="UpdatePostFormController.do"
@@ -176,9 +170,9 @@ ul{
 									<input name="memberId" id="memberId" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
                             </div>
                         </div>
-                    </section>
-                    <a href="javascript:history.back();">목록</a>
-
+                    </section><br><br>
+                    <a href="javascript:history.back();" style="margin-left:45%; font-size: 1.2rem;">목록으로 돌아가기</a><br><br><br><br>
+                    </div>
 <script type="text/javascript">
 	function insertComment() {
 		let articleNo = document.getElementById("articleNo").value;
@@ -243,5 +237,4 @@ ul{
 				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
 				xhr.send("commentNo="+commentNo+"&commentContent="+commentContent);
 		}
-			
 </script>

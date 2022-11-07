@@ -118,6 +118,33 @@ public class BoardDAO {
       return postList;
    }
    
+   public ArrayList<PostVO> findPostList() throws SQLException{
+	      ArrayList<PostVO> postList=new ArrayList<>();
+	      Connection con=null;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      try {
+	         con=getConnection();
+	         StringBuilder sql=new StringBuilder();
+	         sql.append("SELECT cb.rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits");
+	         sql.append(" FROM(");
+	         sql.append(" SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
+	         sql.append(" AS article_time_posted,article_hits FROM carrotmatcat_board");
+	         sql.append(" ) cb");
+	         sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+	         sql.append(" ORDER BY cb.article_no DESC");
+	         pstmt=con.prepareStatement(sql.toString());
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            postList.add(new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname"))));
+	         }
+	      } finally {
+	         closeAll(rs,pstmt,con);
+	      }
+	      return postList;
+	   }
+   
+   
    public int getTotalPostCount() throws SQLException {
       Connection con=null;
       PreparedStatement pstmt=null;
@@ -194,6 +221,7 @@ public class BoardDAO {
          }
          return totalPostCount;
       }
+    
     
    
     public int getTotalPostCountByLikes(String memberId) throws SQLException {
