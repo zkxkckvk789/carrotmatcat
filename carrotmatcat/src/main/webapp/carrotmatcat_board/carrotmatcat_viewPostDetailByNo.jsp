@@ -239,7 +239,6 @@ ul{
 				console.log(commentNo);				
 				let xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
-					alert(xhr.readyState + " "+xhr.status)
 					if (xhr.readyState == 4 && xhr.status == 200) {
 						if(xhr.responseText=="ok") {
 							window.location.reload();
@@ -260,12 +259,10 @@ ul{
 			function updateCommentByResult(){
 				let commentNo = document.getElementById("commentNo").value;
 				let commentContent = document.getElementById("commentContent").innerHTML;
-				alert(commentContent);
 
 				let xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
 					if (xhr.readyState == 4 && xhr.status == 200) {
-							alert(xhr.responseText);
 							window.location.reload();
 					}
 			}
