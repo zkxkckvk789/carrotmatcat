@@ -13,7 +13,7 @@ public class RegisterMemberController implements Controller{
 		String memberPassword=request.getParameter("memberPassword");
 		String memberNickname=request.getParameter("memberNickname");
 		MemberDAO.getInstance().registerMember(new MemberVO(memberId, memberPassword, memberNickname));
-		request.setAttribute("url", "carrotmatcat_member/carrotmatcat_login_form.jsp");
-		return "carrotmatcat_layout.jsp";
+		//request.setAttribute("url", "carrotmatcat_member/carrotmatcat_login_form.jsp");
+		return "carrotmatcat_member/carrotmatcat_login_form.jsp";
 	}
 }
