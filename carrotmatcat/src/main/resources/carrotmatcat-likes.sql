@@ -16,7 +16,7 @@ INSERT INTO carrotmatcat_likes VALUES(9, 'yerin0110');
 DELETE FROM carrotmatcat_likes WHERE article_no='1' AND member_id='javaking';
 
 --
-SELECT COUNT(*) FROM carrotmatcat_likes WHERE member_id='yerin0110';
+SELECT COUNT(*) FROM carrotmatcat_likes WHERE member_id='hasense9410';
 
 --
 SELECT cl.article_no

@@ -123,9 +123,9 @@ WHERE cl.member_id='yerin0110';
 --수정후
 SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category  
 FROM carrotmatcat_board cb
-INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no 
-INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id
-WHERE rnum BETWEEN 1 AND 5 AND cl.member_id='yerin0110'
+INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes WHERE member_id='hasense9410') cl ON cl.article_no=cb.article_no 
+INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id 
+WHERE rnum BETWEEN 1 AND 5 
 ORDER BY cb.article_no DESC;
 
 -- 내가 좋아요 누른 총 게시글 수(pagination에 필요)

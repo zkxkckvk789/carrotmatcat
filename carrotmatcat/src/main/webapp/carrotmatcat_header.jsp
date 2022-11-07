@@ -24,7 +24,9 @@
                       			<li class="nav-item"><a class="nav-link" href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li class="nav-item"><a class="nav-link" href="mypage.jsp">마이페이지</a></li>
+                        		<li class="nav-item">
+                        			<a class="nav-link" href="mypage.jsp">마이페이지</a>
+                        		</li>
                       			<li class="nav-item"><a class="nav-link" href="javascript:logout()">로그아웃</a></li>
                       			<form id="logoutForm" action="${pageContext.request.contextPath}/LogoutController.do" method="post"></form>
                       			<script>
