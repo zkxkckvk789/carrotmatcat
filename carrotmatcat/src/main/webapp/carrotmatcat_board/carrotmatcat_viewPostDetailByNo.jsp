@@ -24,13 +24,12 @@ ul{
 	function like(flag){
 		likeFlag=flag;
 		let articleNo=document.getElementById("articleNo").value;
+		let memberId = document.getElementById("memberId").value;
 		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange=callback; /
+		xhr.onreadystatechange=callback; 
 		xhr.open("POST","LikeController.do",true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xhr.send("articleNo="+articleNo);
-		/* xhr.open("GET","LikeController.do?postNo="+postNo);
-		xhr.send(null); */
+		xhr.send("articleNo="+articleNo+"&memberId="+memberId);
 	}
 	function callback(){
 		if(xhr.readyState==4 && xhr.status==200){
@@ -66,13 +65,13 @@ ul{
 					<span id="likeView">
 					<c:choose>
 						<c:when test="${requestScope.postVO==null}">
-							<a><img onclick="like(false)" src="carrotmatcat_imgaes/no.png"  ></a>
-							<!-- <input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)">-->
+							<!--  <a><img onclick="like(false)" src="carrotmatcat_imgaes/no.png"  ></a>-->
+							<input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)">
 							<!-- <input type="button" value="좋아요!" onclick="return like()"> -->
 						</c:when>
 						<c:otherwise>
-							<a><img onclick="like(true)" src="carrotmatcat_imgaes/yes.png"  ></a>
-							<!--<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)">-->
+							<!-- <a><img onclick="like(true)" src="carrotmatcat_imgaes/yes.png"  ></a> -->
+							<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)">
 						</c:otherwise>
 					</c:choose>
 					</span>
@@ -195,7 +194,7 @@ ul{
 				placeholder="댓글을 남겨보세요" class="comment_inbox_text"
 				style="overflow: hidden; overflow-wrap: break-word;" />
 			<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning">등록</button>
-			<input id="member_id" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
+			<input name="memberId" id="memberId" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
 		</div>
 	</div>
 	<%--<a href="${pageContext.request.contextPath}/FindPostListController.do?pageNo=${requestScope.pageNo}">목록</a> --%>

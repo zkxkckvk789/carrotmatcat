@@ -29,7 +29,7 @@ WHERE cl.member_id='yerin0110';
 SELECT COUNT(*) FROM carrotmatcat_likes WHERE article_no=1;
 
 SELECT article_no FROM carrotmatcat_likes
-WHERE member_id='yerin0110' AND article_no=110;
+WHERE member_id='yerin0110' AND article_no=101;
 
 SELECT * FROM carrotmatcat_likes;
 

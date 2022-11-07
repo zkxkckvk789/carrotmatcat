@@ -92,11 +92,13 @@ public class LikesDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		System.out.println(memberId);
+		System.out.println(articleNo);
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT article_no FROM carrotmatcat_likes ");
-			sql.append("WHERE member_id=? AND post_no=?");
+			sql.append("WHERE member_id=? AND article_no=?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, memberId);
 			pstmt.setLong(2, articleNo);
@@ -104,13 +106,11 @@ public class LikesDAO {
 			if(rs.next()) {
 				postVO = new PostVO();
 				postVO.setArticleNo(Long.parseLong(rs.getString(1)));
-				
 			}
 		}finally {
 			closeAll(con, pstmt, rs);
 		}
 		return postVO;
-
 	}
 	
 }
