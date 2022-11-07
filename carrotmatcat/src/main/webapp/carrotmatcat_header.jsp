@@ -10,7 +10,7 @@
                         <li class="nav-item">
                         	<a class="nav-link" href="${pageContext.request.contextPath}/FindPostListController.do">맛집게시판</a>
 		                        <ul class="nav-item" style="text-align: center;">
-			                        	<li class="nav-item" style="list-style: none;"><a class="nav-link" href="FindPostListByFoodOfKoreanController.do" >한식</a></li>
+			                        	<li class="nav-item" style="list-style: none;"><a class="nav-link" href="${pageContext.request.contextPath}/FindPostListByFoodOfKoreanController.do" >한식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfJapaneseController.do">일식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfChineseController.do">중식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfWesternController.do">양식</a></li>
