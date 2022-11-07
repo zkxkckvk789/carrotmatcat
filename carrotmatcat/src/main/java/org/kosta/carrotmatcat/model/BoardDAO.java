@@ -242,8 +242,7 @@ public class BoardDAO {
          sql.append(" AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board");
          sql.append(" ) cb");
          sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
-         sql.append(" WHERE rnum BETWEEN ? AND ?"
-         		+ " AND cb.article_food_category=?");
+         sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?");
          sql.append(" ORDER BY cb.article_no DESC");
          pstmt=con.prepareStatement(sql.toString());
          pstmt.setLong(1, pagination.getStartRowNumber());
@@ -257,7 +256,7 @@ public class BoardDAO {
       } finally {
          closeAll(rs,pstmt,con);
       }
-      System.out.println("나나");
+      System.out.println(articleFoodCategoryList);
       return articleFoodCategoryList;
    }
    
