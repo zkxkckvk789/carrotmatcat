@@ -75,11 +75,11 @@ ul{
 						</c:otherwise>
 					</c:choose>
 					</span>
-					<span id="like_result">${requestScope.likeCount }</span>
+					<span id="like_result">${requestScope.articleLikesCount }</span>
 				</c:when>
 				<c:otherwise>
 					<img alt="좋아요" src="carrotmatcat_images/no.png">
-					<span>${requestScope.likeCount }</span>
+					<span>${requestScope.articleLikesCount }</span>
 				</c:otherwise> 			
 			</c:choose>
 			
