@@ -17,7 +17,6 @@ public class SearchController implements Controller {
 		
 		if(request.getParameter("searchCategory").equals("제목")){
 			totalPostCount=BoardDAO.getInstance().getTotalPostCountBySearchTitle(request.getParameter("searchContent"));
-			System.out.println(totalPostCount);
 			if(pageNo==null) {
 				pagination=new Pagination(totalPostCount);	
 			} else {
@@ -25,7 +24,6 @@ public class SearchController implements Controller {
 			}
 			request.setAttribute("postList", BoardDAO.getInstance().searchStoreListByTitle(request.getParameter("searchContent"),pagination));
 		} else if(request.getParameter("searchCategory").equals("내용")) {
-			System.out.println("내용입니다 내용");
 			totalPostCount=BoardDAO.getInstance().getTotalPostCountBySearchContent(request.getParameter("searchContent"));
 			System.out.println(totalPostCount);
 			if(pageNo==null) {

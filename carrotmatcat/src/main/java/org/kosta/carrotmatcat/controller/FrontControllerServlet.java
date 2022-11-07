@@ -15,7 +15,6 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String servletPath = request.getServletPath();
-			System.out.println(servletPath);
 			String controllerName = servletPath.substring(1, servletPath.length() - 3);
 			Controller controller = HandlerMapping.getInstance().create(controllerName);
 			String viewPath = controller.handlerRequest(request, response);
