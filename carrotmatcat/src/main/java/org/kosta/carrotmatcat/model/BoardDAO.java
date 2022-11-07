@@ -196,6 +196,33 @@ public class BoardDAO {
       }
     
    
+    public int getTotalPostCountByLikes(String memberId) throws SQLException {
+    	 Connection con=null;
+         PreparedStatement pstmt=null;
+         ResultSet rs=null;
+         int totalPostCount=0;
+         try {
+        	 con=getConnection();
+        	 StringBuilder sql=new StringBuilder();
+        	 sql.append("SELECT COUNT(*) FROM(");
+        	 sql.append(" SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category");
+        	 sql.append(" FROM carrotmatcat_board cb");
+        	 sql.append(" INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl ON cl.article_no=cb.article_no");
+        	 sql.append(" INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id");
+        	 sql.append(" WHERE cl.member_id=?");
+        	 sql.append(" ORDER BY cb.article_no DESC)");
+        	 pstmt=con.prepareStatement(sql.toString());
+        	 pstmt.setString(1, memberId);
+        	 rs=pstmt.executeQuery();
+        	 if(rs.next()) {
+        		 totalPostCount=rs.getInt(1);
+        	 }
+         } finally{
+        	 closeAll(rs, pstmt, con);
+         }
+         return totalPostCount;
+    }
+    
    public void updatePost(PostVO postVO) throws SQLException {
       Connection con=null;
       PreparedStatement pstmt=null;
@@ -242,8 +269,7 @@ public class BoardDAO {
          sql.append(" AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board");
          sql.append(" ) cb");
          sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
-         sql.append(" WHERE rnum BETWEEN ? AND ?"
-         		+ " AND cb.article_food_category=?");
+         sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?");
          sql.append(" ORDER BY cb.article_no DESC");
          pstmt=con.prepareStatement(sql.toString());
          pstmt.setLong(1, pagination.getStartRowNumber());
@@ -257,7 +283,7 @@ public class BoardDAO {
       } finally {
          closeAll(rs,pstmt,con);
       }
-      System.out.println("나나");
+      System.out.println(articleFoodCategoryList);
       return articleFoodCategoryList;
    }
    
@@ -341,15 +367,15 @@ public class BoardDAO {
          StringBuilder sql=new StringBuilder();
          sql.append("SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category");
          sql.append(" FROM carrotmatcat_board cb");
-         sql.append(" INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl");
+         sql.append(" INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes WHERE member_id=?) cl");
          sql.append(" ON cl.article_no=cb.article_no");
          sql.append(" INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id");
-         sql.append(" WHERE rnum BETWEEN ? AND ? AND cl.member_id=?");
+         sql.append(" WHERE rnum BETWEEN ? AND ?");
          sql.append(" ORDER BY cb.article_no DESC");
          pstmt=con.prepareStatement(sql.toString());
-         pstmt.setLong(1, pagination.getStartRowNumber());
-         pstmt.setLong(2, pagination.getEndRowNumber());
-         pstmt.setString(3, memberId);
+         pstmt.setString(1, memberId);
+         pstmt.setLong(2, pagination.getStartRowNumber());
+         pstmt.setLong(3, pagination.getEndRowNumber());
          rs=pstmt.executeQuery();
          while(rs.next()) {
             PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));

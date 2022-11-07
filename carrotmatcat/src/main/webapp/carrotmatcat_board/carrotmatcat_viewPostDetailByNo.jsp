@@ -19,6 +19,31 @@ ul{
 	padding-right:80px;
 }
 </style>
+<script>
+	let likeFlag;
+	function like(flag){
+		likeFlag=flag;
+		let postNo=document.getElementById("postNo").value;
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange=callback; /
+		xhr.open("POST","LikeController.do",true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.send("articleNo="+articleNo);
+		/* xhr.open("GET","LikeController.do?postNo="+postNo);
+		xhr.send(null); */
+	}
+	function callback(){
+		if(xhr.readyState==4 && xhr.status==200){
+			if(likeFlag==false){
+				document.getElementById("likeView").innerHTML="<input type='image' id='yes' src='carrotmatcat_images/yes.png' onclick='like(true)'>";
+			}else{
+				document.getElementById("likeView").innerHTML="<input type='image' id='no' src='carrotmatcat_images/no.png' onclick='like(false)'>";
+			}
+			document.getElementById("like_result").innerHTML=xhr.responseText;
+			
+		}//if
+	}//callback
+</script>
 	<div class="container pt-3">
 			<form>
 				<input type="hidden" id="articleNo" name="articleNo" value="${postDetailView.articleNo}">
@@ -34,6 +59,34 @@ ul{
 			<th style="width: 10%">${postDetailView.memberVO.memberNickname}</th>
 			<th>${postDetailView.articleTimePosted}</th>
 			<th>조회수 ${postDetailView.articleHits}</th>
+			<th>좋아요
+			<c:choose>
+				<c:when test="${sessionScope.memberVO!=null}">
+					<input type="hidden" id="articleNo" value="${requestScope.postVO.articleNo }">
+					<span id="likeView">
+					<c:choose>
+						<c:when test="${requestScope.postVO==null}">
+							<a><img onclick="like(false)" src="carrotmatcat_imgaes/no.png"  ></a>
+							<!-- <input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)">-->
+							<!-- <input type="button" value="좋아요!" onclick="return like()"> -->
+						</c:when>
+						<c:otherwise>
+							<a><img onclick="like(true)" src="carrotmatcat_imgaes/yes.png"  ></a>
+							<!--<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)">-->
+						</c:otherwise>
+					</c:choose>
+					</span>
+					<span id="like_result">${requestScope.likeCount }</span>
+				</c:when>
+				<c:otherwise>
+					<img alt="좋아요" src="carrotmatcat_images/no.png">
+					<span>${requestScope.likeCount }</span>
+				</c:otherwise> 			
+			</c:choose>
+			
+			
+			
+			</th>
 		</tr>
 	</thead>
 		<tbody>
@@ -58,7 +111,8 @@ ul{
 						</form>
 						<div>
 						<button type="button" onclick="updatePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">수정</button>
-						<button type="button" onclick="deletePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">삭제</button> <script>
+						<button type="button" onclick="deletePostByNo()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 50px;">삭제</button> 
+						<script>
 							function deletePostByNo() {
 								let result = confirm("삭제 하시겠습니까?");
 								if (result) {

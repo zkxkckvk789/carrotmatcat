@@ -27,9 +27,7 @@
 	<%-- header/nav 영역끝 --%>
 <%-- main 영역 --%>
 <br><br><br><br><br><br>
-
 <c:import url="${requestScope.url}"></c:import>
-<br><br><br><br><br><br>
 <%-- main 영역끝 --%>
 <div>
 <%-- footer 영역 --%>

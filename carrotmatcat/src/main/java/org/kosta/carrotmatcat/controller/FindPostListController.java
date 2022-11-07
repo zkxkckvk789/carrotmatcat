@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.carrotmatcat.model.BoardDAO;
-import org.kosta.carrotmatcat.model.CommentDAO;
 import org.kosta.carrotmatcat.model.Pagination;
 
 public class FindPostListController implements Controller {
