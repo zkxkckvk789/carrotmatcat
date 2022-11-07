@@ -44,13 +44,3 @@
                 </div>
             </div>
         </nav>
-        
-          <script type="text/javascript">
-	const toggleBtn = document.querySelector("nav-link");
-	const menu = document.querySelector(".navbar__menu");
-	
-	toggleBtn.addEventListener('click', () => { 
-		alert(toggleBtn);
-		menu.classList.toggle('active');
-	});
-</script>

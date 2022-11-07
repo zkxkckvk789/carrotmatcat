@@ -213,7 +213,7 @@ ul{
 		let memberNickname = document.getElementById("comment_inbox_name").innerHTML;
 		let commentContent = document.getElementById("commentContent").value;
 		console.log(articleNo, memberNickname,commentContent);
-		let memberId = document.getElementById("member_id").value;
+		let memberId = document.getElementById("memberId").value;
 		
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
