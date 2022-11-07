@@ -18,7 +18,7 @@ public class FindPostListByFoodOfWesternController implements Controller {
 		} else {
 			pagination = new Pagination(BoardDAO.getInstance().getTotalPostCountByFood(articleFoodCategory), Integer.parseInt(pageNo));
 		} 
-		request.setAttribute("postList", BoardDAO.getInstance().findPostListByFood("양식", pagination));
+		request.setAttribute("postList", BoardDAO.getInstance().findPostListByFood(articleFoodCategory, pagination));
 		request.setAttribute("url", "carrotmatcat_board/carrotmatcat_findPostListByWesternFood.jsp");
 		request.setAttribute("pagination", pagination);
 		

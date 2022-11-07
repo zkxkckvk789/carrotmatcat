@@ -11,18 +11,15 @@ public class FindPostListByFoodOfKoreanController implements Controller {
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String pageNo = request.getParameter("pageNo");
-		String koreanFoodCategory = "한식";
-		int totalPostCount = 0;
+		String articleFoodCategory="한식";
 		Pagination pagination = null;
-		totalPostCount = BoardDAO.getInstance().getTotalPostCountListByFindFoodOfKorean("한식");
 		if (pageNo == null) {
-			pagination = new Pagination(totalPostCount);
+			pagination = new Pagination(BoardDAO.getInstance().getTotalPostCountByFood(articleFoodCategory));
 		} else {
-			pagination = new Pagination(totalPostCount, Integer.parseInt(pageNo));
+			pagination = new Pagination(BoardDAO.getInstance().getTotalPostCountByFood(articleFoodCategory), Integer.parseInt(pageNo));
 		} 
-		request.setAttribute("postList", BoardDAO.getInstance().findPostListByFood("한식", pagination));
-		request.setAttribute("url", "carrotmatcat_board/carrotmatcat_findPostListByFood.jsp");
-		request.setAttribute("koreanFoodCategory", koreanFoodCategory);
+		request.setAttribute("postList", BoardDAO.getInstance().findPostListByFood(articleFoodCategory, pagination));
+		request.setAttribute("url", "carrotmatcat_board/carrotmatcat_findPostListByFoodOfKorean.jsp");
 		request.setAttribute("pagination", pagination);
 		
 		return "carrotmatcat_layout.jsp";
