@@ -50,9 +50,7 @@
 </table>
 </div>
 <c:if test="${sessionScope.memberVO!=null}">
-<span class="write">
-	<a href="${pageContext.request.contextPath}/WritePostFormController.do">글쓰기</a>
-</span>
+
 <br>
 </c:if>
 <ul class="pagination justify-content-center" style="margin:20px 0">	
