@@ -1,13 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style type="text/css">
+ul{
+   list-style:none;
+   }
+   
+ .CommentBox{
+ 	border: 1px solid grey;
+ 	border-radius: 2em;
+ 	padding:10px;
+ }  
+ .comment_inbox{
+ 	padding-left: 30px;
+ }
+.container{
+	padding-left:80px;
+	padding-right:80px;
+}
+</style>
 	<div class="container pt-3">
 			<form>
 				<input type="hidden" id="articleNo" name="articleNo" value="${postDetailView.articleNo}">
 			</form>
-		<table class="table table ">
+		<table class="table table " style="border-collapse; border-radius:8px;" >
 		<thead>
-		<tr style="text-align: left; color: white; border-bottom:dashed;  font-size: 2em;">
+		<tr style="text-align: left; color: white; border-bottom:dashed;  font-size: 2em; ">
 			<th class="no">${postDetailView.articleFoodCategory}</th>
 		</tr>
 		<tr style="font-size: 1.1em; color: #aac414; background-color: white;">
@@ -62,9 +80,7 @@
 			</c:if>
 			</tbody>
 		</table>
-	</div>
-
-<div class="CommentBox">
+		<div class="CommentBox">
 	<div class="comment_option">
 		<h3 class="comment_title">댓글</h3>
 	</div>
@@ -111,6 +127,7 @@
 							<br> <span class="comment_info_date">${clist.commentTimePosted }</span>
 						</p>
 					</div>
+					<hr>
 				</div>
 			</li>
 		</c:forEach>
@@ -123,12 +140,15 @@
 				name="${sessionScope.memberVO.getMemberNickname() }"
 				placeholder="댓글을 남겨보세요" class="comment_inbox_text"
 				style="overflow: hidden; overflow-wrap: break-word;" />
-			<button name="commentbtn" id="commentbtn" onclick="insertComment()">등록</button>
+			<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning">등록</button>
 			<input id="member_id" type="hidden"
 				value="${sessionScope.memberVO.getMemberId() }" />
 		</div>
 	</div>
 </div>
+	</div>
+
+
 </body>
 </html>
 

@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h3></h3> <%-- 선택한 카테고리 이름 자리--%>
 <br>
+<style>
+	.table{
+		padding-left:80px;
+		padding-right:80px;
+		
+	}
+</style>
 <div class="search">
 	<form action="${pageContext.request.contextPath}/SearchController.do" method="get">
 		<select name="searchCategory" style="color: white; background-color: orange; border: 4px solid orange; border-radius: 50px;">

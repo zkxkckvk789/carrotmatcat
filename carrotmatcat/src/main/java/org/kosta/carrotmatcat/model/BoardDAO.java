@@ -194,6 +194,7 @@ public class BoardDAO {
          }
          return totalPostCount;
       }
+    
    
    public void updatePost(PostVO postVO) throws SQLException {
       Connection con=null;

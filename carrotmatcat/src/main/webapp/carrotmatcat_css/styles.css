@@ -3995,6 +3995,26 @@ textarea.form-control-lg {
   background-color: transparent;
   border-color: transparent;
 }
+.navbar{
+	padding:100px;
+	align-items:flex-start;
+}
+
+.navbar__menu{
+	align-items: center;
+}
+
+.navbar__menu li{
+	display:flex;
+}
+
+.navbar__menu.active{
+	display:flex;
+}
+
+.nav-link{
+	display:flex;
+}
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
@@ -4059,6 +4079,7 @@ textarea.form-control-lg {
 .navbar > .container-lg,
 .navbar > .container-xl,
 .navbar > .container-xxl {
+
   display: flex;
   flex-wrap: inherit;
   align-items: center;
