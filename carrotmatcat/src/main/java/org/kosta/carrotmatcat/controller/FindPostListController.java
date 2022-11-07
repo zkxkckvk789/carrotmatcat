@@ -13,7 +13,7 @@ public class FindPostListController implements Controller {
 		BoardDAO boardDAO=BoardDAO.getInstance();
 		String pageNo=request.getParameter("pageNo");
 		Pagination pagination=null;
-		
+		System.out.println("은서");
 		int totalPostCount=boardDAO.getTotalPostCount();
 		if(pageNo==null) {
 			pagination=new Pagination(totalPostCount);

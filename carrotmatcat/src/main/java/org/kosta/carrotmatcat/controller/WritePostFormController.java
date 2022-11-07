@@ -9,5 +9,4 @@ public class WritePostFormController implements Controller {
 		request.setAttribute("url","carrotmatcat_board/carrotmatcat_write_post_form.jsp");
 		return "carrotmatcat_layout.jsp";
 	}
-
 }

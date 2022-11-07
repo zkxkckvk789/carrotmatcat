@@ -5,19 +5,20 @@
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="HomeController.do"><img src="carrotmatcat_images/carrotmatat_logo.png" style="width:50%"></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="navbar" id="navbarResponsive" style="">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item">
+
                         	<a class="nav-link" href="${pageContext.request.contextPath}/FindPostListController.do">맛집게시판</a>
 		                        <ul class="nav-item" style="text-align: center;">
-			                        	<li class="nav-item" style="list-style: none;"><a class="nav-link" href="FindPostListByFoodOfKoreanController.do" >한식</a></li>
+			                        	<li class="nav-item" style="list-style: none;"><a class="nav-link" href="${pageContext.request.contextPath}/FindPostListByFoodOfKoreanController.do" >한식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfJapaneseController.do">일식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfChineseController.do">중식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfWesternController.do">양식</a></li>
 			                        	<li class="nav-item" style="list-style: none"><a class="nav-link" href="FindPostListByFoodOfCafeAndDessertController.do">카페/디저트</a></li>
 		                        </ul>   
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#services">오늘 뭐 먹지?</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/RecommandStoreByLikesUsingRandomFormController.do">오늘 뭐 먹지?</a></li>
                         <c:choose>
                         	<c:when test="${sessionScope.memberVO==null}">
                        			<li class="nav-item"><a class="nav-link" href="carrotmatcat_member/carrotmatcat_login_form.jsp" >로그인</a></li>
@@ -41,3 +42,13 @@
                 </div>
             </div>
         </nav>
+        
+          <script type="text/javascript">
+	const toggleBtn = document.querySelector("nav-link");
+	const menu = document.querySelector(".navbar__menu");
+	
+	toggleBtn.addEventListener('click', () => { 
+		alert(toggleBtn);
+		menu.classList.toggle('active');
+	});
+</script>

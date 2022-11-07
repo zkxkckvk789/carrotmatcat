@@ -136,9 +136,7 @@ public class BoardDAO {
       }
       return totalPostCount;
    }
-   
-   
-   
+    
    //제목조회 게시글용 리스트
    public int getTotalPostCountBySearchTitle(String articleTitle) throws SQLException {
       Connection con=null;
@@ -167,10 +165,9 @@ public class BoardDAO {
       }
       return totalPostCount;
    }
-   
-   
+      
    //내용조회 게시글용 리스트
-      public int getTotalPostCountBySearchContent(String articleContent) throws SQLException {
+    public int getTotalPostCountBySearchContent(String articleContent) throws SQLException {
          Connection con=null;
          PreparedStatement pstmt=null;
          ResultSet rs=null;
@@ -197,12 +194,7 @@ public class BoardDAO {
          }
          return totalPostCount;
       }
-   
-   
-   
-   
-   
-   
+    
    
    public void updatePost(PostVO postVO) throws SQLException {
       Connection con=null;
@@ -250,7 +242,8 @@ public class BoardDAO {
          sql.append(" AS article_time_posted,article_hits, article_food_category FROM carrotmatcat_board");
          sql.append(" ) cb");
          sql.append(" INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
-         sql.append(" WHERE rnum BETWEEN ? AND ? AND cb.article_food_category=?");
+         sql.append(" WHERE rnum BETWEEN ? AND ?"
+         		+ " AND cb.article_food_category=?");
          sql.append(" ORDER BY cb.article_no DESC");
          pstmt=con.prepareStatement(sql.toString());
          pstmt.setLong(1, pagination.getStartRowNumber());
@@ -264,6 +257,7 @@ public class BoardDAO {
       } finally {
          closeAll(rs,pstmt,con);
       }
+      System.out.println("나나");
       return articleFoodCategoryList;
    }
    
@@ -367,6 +361,34 @@ public class BoardDAO {
       return articleMemberIdList;   
    }
    
+   public ArrayList<PostVO> findLikesListPostByMemberId(String memberId) throws SQLException{
+	      ArrayList<PostVO> articleMemberIdList = new  ArrayList<PostVO>();       
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         con = getConnection();
+	         StringBuilder sql=new StringBuilder();
+	         sql.append("SELECT cl.rnum, cl.article_no, cm.member_nickname, cb.article_title, cb.member_id, cb.article_store_name,  cb.article_time_posted, cb.article_hits, cb.article_food_category");
+	         sql.append(" FROM carrotmatcat_board cb");
+	         sql.append(" INNER JOIN (SELECT ROW_NUMBER() OVER(ORDER BY article_no DESC) AS rnum,article_no,member_id FROM carrotmatcat_likes) cl");
+	         sql.append(" ON cl.article_no=cb.article_no");
+	         sql.append(" INNER JOIN carrotmatcat_member cm ON cm.member_id=cb.member_id");
+	         sql.append(" WHERE cl.member_id=?");
+	         sql.append(" ORDER BY cb.article_no DESC");
+	         pstmt=con.prepareStatement(sql.toString());
+	         pstmt.setString(1, memberId);
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
+	            articleMemberIdList.add(postVO);
+	         }
+	      }finally {
+	         closeAll(rs,pstmt,con);
+	      } 
+	      return articleMemberIdList;   
+	   }
+   
    public void updateHits(long articleNo) throws SQLException {
       Connection con=null;
       PreparedStatement pstmt=null;
@@ -381,7 +403,35 @@ public class BoardDAO {
       }
    }
    
-   
+   public int getTotalPostCountListByFindFoodOfKorean(String articleFoodCategory) throws SQLException {
+       Connection con=null;
+       PreparedStatement pstmt=null;
+       ResultSet rs=null;
+       int totalPostCount=0;
+       try {
+          con=getConnection();
+          StringBuilder sql=new StringBuilder();
+          sql.append("SELECT COUNT(*) AS totalPostCount FROM");
+          sql.append(" (SELECT ROW_NUMBER() OVER(ORDER BY cb.article_no DESC) AS rnum,cb.article_no, cb.article_title,cb.article_store_name, cm.member_nickname, cb.article_time_posted, cb.article_hits, cb.article_food_category,cb.article_content");
+          sql.append(" FROM(");
+          sql.append(" SELECT article_no,article_title,member_id,article_store_name,TO_CHAR(article_time_posted,'YYYY.MM.DD HH:MI:SS')");
+          sql.append(" AS article_time_posted,article_hits, article_food_category,article_content FROM carrotmatcat_board");
+          sql.append("  ) cb");
+          sql.append("  INNER JOIN carrotmatcat_member cm ON cb.member_id = cm.member_id");
+          sql.append("  WHERE cb.article_food_category = ?) cb");
+          pstmt=con.prepareStatement(sql.toString());
+          pstmt.setString(1, articleFoodCategory);
+          rs=pstmt.executeQuery();
+          if(rs.next()) {
+             totalPostCount=rs.getInt("totalPostCount");
+          }
+       } finally {
+          closeAll(rs,pstmt,con);
+       }
+       System.out.println(totalPostCount);
+       return totalPostCount;
+    }
+ 
    
    
    

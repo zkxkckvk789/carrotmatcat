@@ -71,7 +71,7 @@ public class CommentDAO {
 			sql.append(" FROM carrotmatcat_comment  cc");
 			sql.append(" INNER JOIN carrotmatcat_member cm ON cc.member_id = cm.member_id");
 			sql.append(" INNER JOIN carrotmatcat_board cb ON cb.article_no = cc.article_no");
-			sql.append(" WHERE cc.article_no=?");
+			sql.append(" WHERE cc.article_no=? ORDER BY cc.comment_no");
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setLong(1, articleNo);
 			rs=pstmt.executeQuery();
