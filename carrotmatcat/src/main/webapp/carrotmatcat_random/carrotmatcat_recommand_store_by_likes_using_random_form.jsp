@@ -3,6 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <a href="${pageContext.request.contextPath}/RecommandStoreByLikesUsingRandomController.do" onclick="loading()">
 	<br>
-	<img src="carrotmatcat_images/randomFood.gif" style="width:50%; margin-left:20%">
+	<img src="carrotmatcat_images/randomFood.gif" style="width:50%; margin-left:20%;display: block; margin-left: auto; margin-right: auto; width: 50%;">
 </a>
 
