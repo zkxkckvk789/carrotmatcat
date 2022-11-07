@@ -133,79 +133,50 @@ ul{
 			</c:if>
 			</tbody>
 		</table>
-		<div class="CommentBox">
 	<div class="comment_option">
-		<h3 class="comment_title">댓글</h3>
+		<h3 class="comment_title" style="color:white;">댓글</h3>
 	</div>
-	<ul class="comment_list">
-		<c:forEach items="${commentList}" var="clist">
-			<li class="CommentItem CommentItem--mine">
-				<div class="comment_area"></div>
-				<div class="comment_box">
-					<div class="comment_nick_info">
-						<a href="#" role="button" class="comment_nickname"
-							id="comment_nickname"> ${clist.memberVO.getMemberNickname() }
-						</a>
-					</div>
-					<div class="comment_text_box">
-						<p class="comment_text_view">
-							<span class="text_comment"></span>
-							<c:choose>
-								<c:when
-									test="${sessionScope.memberVO.getMemberNickname()==clist.memberVO.getMemberNickname()}">
-
-									<form id="modifyCommentForm"
-										action="UpdateCommentController.do" method="post">
-										<input type="hidden" name="commentNo" id="commentNo"
-											value="${clist.commentNo}">
-									</form>
-									<form id="deleteCommentForm"
-										action="DeleteCommentController.do" method="post">
-										<input type="hidden" name="commentNo"
-											value="${clist.commentNo}">
-									</form>
-									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp" id="commentContent">${clist.commentContent}</a><br>
-									<button type="button" onclick="updateComment()"
-										style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글
-										수정</button>
-									<button type="button" onclick="deleteComment()"
-										style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글
-										삭제</button>
-									
-								</c:when>
-								<c:otherwise>
-									<a href="carrotmatcat_member/carrotmatcat_login_form.jsp" id="commentContent">${clist.commentContent}</a>
-								</c:otherwise>
-							</c:choose>
-							<br> <span class="comment_info_date">${clist.commentTimePosted }</span>
-						</p>
-					</div>
-					<hr>
-				</div>
-			</li>
-		</c:forEach>
-	</ul>
-	<div class="CommentWriter">
-		<div class="comment_inbox">
-			<em class="comment_inbox_name" id="comment_inbox_name">${memberVO.getMemberNickname()}</em>
-
-			<input type="text" id="commentContent"
-				name="${sessionScope.memberVO.getMemberNickname() }"
-				placeholder="댓글을 남겨보세요" class="comment_inbox_text"
-				style="overflow: hidden; overflow-wrap: break-word;" />
-			<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning">등록</button>
-			<input name="memberId" id="memberId" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
-		</div>
-	</div>
-	<%--<a href="${pageContext.request.contextPath}/FindPostListController.do?pageNo=${requestScope.pageNo}">목록</a> --%>
-	<a href="javascript:history.back();">목록</a>
-	
-</div>
-	</div>
-
-
-</body>
-</html>
+	 <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body" style="background-color: white;">
+                                <!-- Single comment-->
+                                <c:forEach items="${commentList}" var="clist">
+                                		<div class="d-flex">
+                                    		<div class="flex-shrink-0"><img src="carrotmatcat_images/carrotmatat_logo.png" alt="..." style="width:30px"/></div>
+                                    		<div class="ms-3">
+                                        			<div class="fw-bold">
+                                       				 <a href="#" role="button" class="comment_nickname" id="comment_nickname"> ${clist.memberVO.getMemberNickname() }</a>
+                                        			</div>
+                                        <c:choose>
+											<c:when test="${sessionScope.memberVO.getMemberNickname()==clist.memberVO.getMemberNickname()}">
+												<form id="modifyCommentForm" action="UpdateCommentController.do" method="post">
+													<input type="hidden" name="commentNo" id="commentNo" value="${clist.commentNo}">
+												</form>
+												<form id="deleteCommentForm" action="DeleteCommentController.do" method="post">
+													<input type="hidden" name="commentNo" value="${clist.commentNo}">
+												</form>
+														${clist.commentContent}<br>
+													<button type="button" onclick="updateComment()" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
+													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
+										</c:when>
+										<c:otherwise>
+                                    			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
+                                    			<hr align="center" style="border: solid 1px gray; width: 50%;">
+                                   	 	</c:otherwise>
+                                    	</c:choose>
+                                    		</div>
+                                		</div>
+                               	</c:forEach>
+                               	<hr>
+                               	 <!-- Comment form-->
+                                		<em class="comment_inbox_name" id="comment_inbox_name">${memberVO.getMemberNickname()}</em>
+                                		<textarea class="form-control" id="commentContent" rows="3" placeholder="댓글을 등록하세요!"></textarea><br>
+                                		<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning" style="margin-left:95%; background-color: #ef7b35; border-color: #ef7b35; ">등록</button>
+									<input name="memberId" id="memberId" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
+                            </div>
+                        </div>
+                    </section>
+                    <a href="javascript:history.back();">목록</a>
 
 <script type="text/javascript">
 	function insertComment() {
@@ -213,7 +184,7 @@ ul{
 		let memberNickname = document.getElementById("comment_inbox_name").innerHTML;
 		let commentContent = document.getElementById("commentContent").value;
 		console.log(articleNo, memberNickname,commentContent);
-		let memberId = document.getElementById("member_id").value;
+		let memberId = document.getElementById("memberId").value;
 		
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
@@ -274,5 +245,3 @@ ul{
 				xhr.send("commentNo="+commentNo+"&commentContent="+commentContent);
 		}
 </script>
-</body>
-</html>
