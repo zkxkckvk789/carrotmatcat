@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.kosta.carrotmatcat.model.BoardDAO;
 import org.kosta.carrotmatcat.model.CommentDAO;
 import org.kosta.carrotmatcat.model.CommentVO;
+import org.kosta.carrotmatcat.model.LikesDAO;
 
 public class ViewPostDetailByNoController implements Controller{
 	@Override
@@ -16,7 +17,8 @@ public class ViewPostDetailByNoController implements Controller{
 		long articleNo = Long.parseLong(request.getParameter("articleNo"));
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		ArrayList<CommentVO> commentList= commentDAO.viewCommentDetail(articleNo);
-		
+		LikesDAO likesDAO = LikesDAO.getInstance();
+		long articleLikesCount = likesDAO.likeCount(articleNo);
 		HttpSession session = request.getSession(false);
 		@SuppressWarnings("unchecked")
 		ArrayList<Long> viewPost=(ArrayList<Long>)session.getAttribute("viewPost");
@@ -27,7 +29,7 @@ public class ViewPostDetailByNoController implements Controller{
 		
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("postDetailView", BoardDAO.getInstance().viewPostDetailByNo(articleNo));
-		
+		request.setAttribute("articleLikesCount", articleLikesCount);
 		request.setAttribute("url", "carrotmatcat_board/carrotmatcat_viewPostDetailByNo.jsp");
 		return "carrotmatcat_layout.jsp";
 	}
