@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <form action="${pageContext.request.contextPath}/WritePostController.do" method="post">
-<br>
+<br>	<div  style="padding-left:150px; padding-right:150px;">
 	<table class="table">
+
 		<tr>
 			<td><input type="text" name="articleStoreName" placeholder="맛집 이름 (상호명)" required="required"></td>
 		</tr>
@@ -28,5 +29,6 @@
 <div class="text-center">
 	<button type="submit" class="btn btn-success">확인</button>
 	<button type="reset" class="btn btn-success">취소</button>
+</div>
 </div>
 </form>

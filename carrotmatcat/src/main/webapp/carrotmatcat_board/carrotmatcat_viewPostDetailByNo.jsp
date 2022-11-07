@@ -160,6 +160,7 @@ ul{
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
 										</c:when>
 										<c:otherwise>
+												${clist.commentContent}<br>
                                     			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
                                     			<hr align="center" style="border: solid 1px gray; width: 50%;">
                                    	 	</c:otherwise>
