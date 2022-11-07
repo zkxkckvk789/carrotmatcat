@@ -23,7 +23,7 @@ ul{
 	let likeFlag;
 	function like(flag){
 		likeFlag=flag;
-		let postNo=document.getElementById("postNo").value;
+		let articleNo=document.getElementById("articleNo").value;
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange=callback; /
 		xhr.open("POST","LikeController.do",true);
