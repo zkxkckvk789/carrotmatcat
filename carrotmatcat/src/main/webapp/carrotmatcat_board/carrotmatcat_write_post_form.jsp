@@ -12,8 +12,9 @@
 			<td><input type="text" name="articleTitle" placeholder="제목" required="required"></td>
 		</tr>
 		<tr>
-			<td><select class="selectpicker" onchange="window.open(value,'_self');"
-                            style="display: inline; name="articleFoodCategory">
+			<td>
+			
+			<select class="selectpicker" style="display: inline;" name="articleFoodCategory">
 					<option value="한식">한식</option>
 					<option value="일식">일식</option>
 					<option value="양식">양식</option>

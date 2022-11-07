@@ -23,6 +23,7 @@ public class WritePostController implements Controller {
 		postVO.setArticleStoreName(request.getParameter("articleStoreName"));
 		postVO.setArticleFoodCategory(request.getParameter("articleFoodCategory"));
 		postVO.setArticleContent(request.getParameter("articleContent"));
+		System.out.println(postVO);
 		postVO.setMemberVO(memberVO);
 		BoardDAO.getInstance().posting(postVO);
 		return "redirect:FindPostListController.do";
