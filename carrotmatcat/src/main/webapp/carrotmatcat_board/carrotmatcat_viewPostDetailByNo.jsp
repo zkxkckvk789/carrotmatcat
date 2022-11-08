@@ -154,9 +154,9 @@ ul{
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
 											
 														<div id="commentUpdateZone${clist.commentNo}" style="display: none;">
-															<input type="hidden" id="comment_No" value="${clist.commentNo}">
-															<textarea class="" id="comment_update_content" rows="3" placeholder="${clist.commentContent}" style="width:60vw"></textarea><br>
-															<button name="commentupdatebtn" id="commentupdatebtn" class="btn btn-warning" onclick="updateComment()" style=" color: white; margin-left:52vw; background-color: #ef7b35; border-color: #ef7b35; ">수정</button>
+															<input type="hidden" id="comment_No${clist.commentNo}" value="${clist.commentNo}">
+															<textarea class="" id="comment_update_content${clist.commentNo}" rows="3" placeholder="${clist.commentContent}" style="width:60vw"></textarea><br>
+															<button name="commentupdatebtn" id="commentupdatebtn" class="btn btn-warning" onclick="updateComment(${clist.commentNo})" style=" color: white; margin-left:52vw; background-color: #ef7b35; border-color: #ef7b35; ">수정</button>
 															<button name="commentupdatebtn_no" id="commentupdatebtn_no" class="btn btn-warning" onclick="commentUpdateZoneHide(${clist.commentNo})" style=" color: white; background-color: #ef7b35; border-color: #ef7b35;">취소</button>
 														</div>
 													
@@ -183,7 +183,6 @@ ul{
                     </div>
 <script type="text/javascript">
 function updateCommentForm(commentNum) {
-	alert(commentNum);
 	document.getElementById("commentUpdateZone"+commentNum).style.display="";
 }
 
@@ -191,11 +190,13 @@ function commentUpdateZoneHide(commentNum){
 	document.getElementById("commentUpdateZone"+commentNum).style.display="none";
 }
 
-function updateComment() {
+function updateComment(commentNum) {
 	let result = confirm("수정 하시겠습니까?");
 	if (result) {
-		let commentNo = document.getElementById("comment_No").value;
-		let commentContent = document.getElementById("comment_update_content").value;
+		let commentNo = document.getElementById("comment_No"+commentNum).value;
+		let commentContent = document.getElementById("comment_update_content"+commentNum).value;
+		alert(commentNo);
+		alert(commentContent);
 		console.log(commentNo,commentContent);
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때

@@ -12,6 +12,7 @@ public class UpdateCommentController implements Controller{
 		long commentNo = Long.parseLong(request.getParameter("comment_No"));
 		String commentContent = request.getParameter("comment_update_content");
 		CommentVO commentVO=new CommentVO(commentNo,commentContent);
+		System.out.println(commentVO);
 		CommentDAO commentDAO = CommentDAO.getInstance();
 		commentDAO.updateComment(commentVO);
 		request.setAttribute("responsebody", "ok");
