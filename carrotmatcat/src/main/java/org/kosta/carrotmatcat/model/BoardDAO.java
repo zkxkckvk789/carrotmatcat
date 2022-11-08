@@ -311,7 +311,6 @@ public class BoardDAO {
       } finally {
          closeAll(rs,pstmt,con);
       }
-      System.out.println(articleFoodCategoryList);
       return articleFoodCategoryList;
    }
    
@@ -374,14 +373,10 @@ public class BoardDAO {
             while(rs.next()) {
                PostVO postVO=new PostVO(rs.getLong("article_no"),rs.getString("article_title"),rs.getString("article_store_name"),rs.getLong("article_hits"),rs.getString("article_time_posted"),new MemberVO(null,null,rs.getString("member_nickname")));
                articleContentList.add(postVO);
-               System.out.println(postVO);
             }
          } finally {
             closeAll(rs,pstmt,con);
          }
-        for(PostVO postVO :articleContentList ) {
-           System.out.println(postVO);
-        }
          return articleContentList;
       }
    
@@ -482,7 +477,6 @@ public class BoardDAO {
        } finally {
           closeAll(rs,pstmt,con);
        }
-       System.out.println(totalPostCount);
        return totalPostCount;
     }
  
