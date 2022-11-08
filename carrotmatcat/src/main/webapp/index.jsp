@@ -20,7 +20,7 @@ height: 100vh;
 
 .matcat{
  position: absolute;
-  width: 80%;
+  width: 100%;
 }
 
 body{
