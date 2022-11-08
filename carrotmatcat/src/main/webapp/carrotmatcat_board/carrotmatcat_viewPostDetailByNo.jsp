@@ -176,7 +176,7 @@ ul{
                             </div>
                         </div>
                     </section><br><br>
-                    <a href="javascript:history.back();" style="margin-left:45%; font-size: 1.2rem;">목록으로 돌아가기</a><br><br><br><br>
+                    <a href="javascript:history.back();" style="margin-left:45%; font-size: 1.2rem; text-decoration: none;">목록으로 돌아가기</a><br><br><br><br>
                     </div>
 <script type="text/javascript">
 function updateCommentForm(commentNum) {
