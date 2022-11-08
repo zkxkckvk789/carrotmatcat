@@ -150,8 +150,16 @@ ul{
 													<input type="hidden" name="commentNo" value="${clist.commentNo}">
 												</form>
 														${clist.commentContent}<br>
-													<button type="button" onclick="updateComment()" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
+													<button type="button" onclick="updateCommentForm(${clist.commentNo})" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
+											
+														<div id="commentUpdateZone${clist.commentNo}" style="display: none;">
+															<input type="hidden" id="comment_No" value="${clist.commentNo}">
+															<textarea class="" id="comment_update_content" rows="3" placeholder="${clist.commentContent}" style="width:60vw"></textarea><br>
+															<button name="commentupdatebtn" id="commentupdatebtn" class="btn btn-warning" onclick="updateComment()" style=" color: white; margin-left:52vw; background-color: #ef7b35; border-color: #ef7b35; ">수정</button>
+															<button name="commentupdatebtn_no" id="commentupdatebtn_no" class="btn btn-warning" onclick="commentUpdateZoneHide(${clist.commentNo})" style=" color: white; background-color: #ef7b35; border-color: #ef7b35;">취소</button>
+														</div>
+													
 										</c:when>
 										<c:otherwise>
 											${clist.commentContent}
@@ -166,7 +174,7 @@ ul{
                                	 <!-- Comment form-->
                                 		<em class="comment_inbox_name" id="comment_inbox_name">${memberVO.getMemberNickname()}</em>
                                 		<textarea class="form-control" id="commentContent" rows="3" placeholder="댓글을 등록하세요!"></textarea><br>
-                                		<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning" style="margin-left:95%; background-color: #ef7b35; border-color: #ef7b35; ">등록</button>
+                                		<button name="commentbtn" id="commentbtn" onclick="insertComment()" class="btn btn-warning" style=" color: white; margin-left:90%; background-color: #ef7b35; border-color: #ef7b35; ">등록</button>
 									<input name="memberId" id="memberId" type="hidden" value="${sessionScope.memberVO.getMemberId()}" />
                             </div>
                         </div>
@@ -174,6 +182,36 @@ ul{
                     <a href="javascript:history.back();" style="margin-left:45%; font-size: 1.2rem;">목록으로 돌아가기</a><br><br><br><br>
                     </div>
 <script type="text/javascript">
+function updateCommentForm(commentNum) {
+	alert(commentNum);
+	document.getElementById("commentUpdateZone"+commentNum).style.display="";
+}
+
+function commentUpdateZoneHide(commentNum){
+	document.getElementById("commentUpdateZone"+commentNum).style.display="none";
+}
+
+function updateComment() {
+	let result = confirm("수정 하시겠습니까?");
+	if (result) {
+		let commentNo = document.getElementById("comment_No").value;
+		let commentContent = document.getElementById("comment_update_content").value;
+		console.log(commentNo,commentContent);
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				if(xhr.responseText=="ok"){
+					document.getElementById("commentUpdateZone"+commentNo).style.display="none";
+					window.location.reload();
+				}
+			}
+	}
+		xhr.open("post","${pageContext.request.contextPath}/UpdateCommentController.do", true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
+		xhr.send("comment_No="+commentNo+"&comment_update_content="+commentContent);
+	}
+}
+
 	function insertComment() {
 		let articleNo = document.getElementById("articleNo").value;
 		let memberNickname = document.getElementById("comment_inbox_name").innerHTML;
@@ -214,27 +252,5 @@ ul{
 				xhr.open("post","${pageContext.request.contextPath}/DeleteCommentController.do", true);
 				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
 				xhr.send("commentNo="+commentNo);
-		}
-			function updateComment() {
-				let result = confirm("수정 하시겠습니까?");
-				if (result) {
-					
-					updateCommentByResult();
-				}
-			}
-		
-			function updateCommentByResult(){
-				let commentNo = document.getElementById("commentNo").value;
-				let commentContent = document.getElementById("commentContent").innerHTML;
-
-				let xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
-					if (xhr.readyState == 4 && xhr.status == 200) {
-							window.location.reload();
-					}
-			}
-				xhr.open("post","${pageContext.request.contextPath}/UpdateCommentFormController.do", true);
-				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
-				xhr.send("commentNo="+commentNo+"&commentContent="+commentContent);
 		}
 </script>

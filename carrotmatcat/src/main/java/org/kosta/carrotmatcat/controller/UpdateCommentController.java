@@ -7,10 +7,14 @@ import org.kosta.carrotmatcat.model.CommentDAO;
 import org.kosta.carrotmatcat.model.CommentVO;
 
 public class UpdateCommentController implements Controller{
-
 	@Override
 	public String handlerRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return null;
-	}
-	
+		long commentNo = Long.parseLong(request.getParameter("comment_No"));
+		String commentContent = request.getParameter("comment_update_content");
+		CommentVO commentVO=new CommentVO(commentNo,commentContent);
+		CommentDAO commentDAO = CommentDAO.getInstance();
+		commentDAO.updateComment(commentVO);
+		request.setAttribute("responsebody", "ok");
+		return "AjaxView";
+	}	
 }
