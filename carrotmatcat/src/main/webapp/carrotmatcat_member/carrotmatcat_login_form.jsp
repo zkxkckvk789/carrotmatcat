@@ -114,12 +114,21 @@ body {
 <img src="${pageContext.request.contextPath}/carrotmatcat_images/login.png" class="matcat">
   <div class="form">
     <form class="login-form" action="${pageContext.request.contextPath}/LoginController.do" method="post">
-      <input type="text" name="memberId" placeholder="아이디" required="required">
-      <input type="password" name="memberPassword" placeholder="패스워드" required="required">
-      <button>로그인</button>
+      <input type="text" id="memberId" name="memberId" placeholder="아이디" required="required">
+      <input type="password" id="memberPassword"  name="memberPassword" placeholder="패스워드" required="required">
+      <button onclick="trimCheck()">로그인</button>
       <p class="message">아직 회원이 아니신가요? <a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a></p>
     </form>
   </div>
 </div>
 </body>
+<script type="text/javascript">
+function trimCheck() {
+	let memberId=document.getElementById("memberId").value;
+	let memberPassword=document.getElementById("memberPassword").value;
+	if(memberId.trim()<1 || memberPassword.trim()<1){
+		alert("공백 등록은 불가능합니다");
+		event.preventDefault();
+	} 
+</script>
 

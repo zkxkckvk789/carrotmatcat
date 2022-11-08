@@ -114,15 +114,15 @@ body {
 <img src="${pageContext.request.contextPath}/carrotmatcat_images/login.png" class="matcat">
  <div class="form">
 <form class="register-form" action="${pageContext.request.contextPath}/RegisterMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
-	<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
+	<input id="memberId" type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
 	<button type="button" onclick="checkMemberId()">아이디 중복확인</button><br><br>
 	<span id="checkMemberIdResult"></span><br><br>
 	
-	<input type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"><br>
+	<input id="memberPassword" type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"><br>
 	<input type="password" name="memberPassword" id="memberPasswordTwo" placeholder="패스워드" required="required" onkeyup="checkPassword()"><br><br>
 	<span id="checkMemberPasswordResult"></span><br><br>
 	
-	<input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required">
+	<input id="memberNickname" type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required">
 	<button type="button" onclick="checkMemberNickname()">닉네임 중복확인</button><br><br>
 	<span id="checkMemberNicknameResult"></span><br><br>
 	
@@ -200,6 +200,16 @@ body {
 		xhr.open("get","${pageContext.request.contextPath}/CheckDuplicateNicknameController.do?memberNickname="+memberNickname);
 		xhr.send();
 	}
+	
+	function trimCheck() {
+		let memberId=document.getElementById("memberId").value;
+		let memberPassword=document.getElementById("memberPassword").value;
+		let memberNickname=document.getElementById("memberNickname").value;
+		if(password.trim()<1 || nickname.trim()<1){
+			alert("공백 등록은 불가능합니다");
+			event.preventDefault();
+		} 
+	
 </script>
 </div>
 </body>

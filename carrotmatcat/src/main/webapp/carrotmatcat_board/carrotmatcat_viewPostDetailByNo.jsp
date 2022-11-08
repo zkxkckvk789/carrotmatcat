@@ -133,7 +133,6 @@ ul{
 	 <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body" style="background-color: white;">
-                                <!-- Single comment-->
                                 <c:forEach items="${commentList}" var="clist">
                                 		<div class="d-flex">
                                     		<div class="flex-shrink-0"><img src="carrotmatcat_images/carrotmatat_logo.png" alt="..." style="width:30px"/></div>
@@ -194,6 +193,10 @@ function updateComment(commentNum) {
 		let commentNo = document.getElementById("comment_No"+commentNum).value;
 		let commentContent = document.getElementById("comment_update_content"+commentNum).value;
 		console.log(commentNo,commentContent);
+		if(commentContent.trim()<1){
+			alert("공백 등록은 불가능합니다");
+			event.preventDefault();
+		} else{
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때	
 			if (xhr.readyState == 4 && xhr.status == 200) {
@@ -207,6 +210,7 @@ function updateComment(commentNum) {
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
 		xhr.send("comment_No="+commentNo+"&comment_update_content="+commentContent);
 	}
+		}
 }
 
 	function insertComment() {
@@ -215,7 +219,10 @@ function updateComment(commentNum) {
 		let commentContent = document.getElementById("commentContent").value;
 		console.log(articleNo, memberNickname,commentContent);
 		let memberId = document.getElementById("memberId").value;
-		
+		if(commentContent.trim()<1){
+			alert("공백 등록은 불가능합니다");
+			event.preventDefault();
+		} else{
 		let xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
 			if (xhr.readyState == 4 && xhr.status == 200) {
@@ -226,7 +233,8 @@ function updateComment(commentNum) {
 		}
 			xhr.open("post","${pageContext.request.contextPath}/WriteCommentController.do", true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=euc-kr');
-			xhr.send("articleNo="+articleNo+ "&memberNickname="+memberNickname+"&commentContent="+commentContent+"&memberId="+memberId);
+			xhr.send("articleNo="+articleNo+ "&memberNickname="+memberNickname+"&commentContent="+commentContent+"&memberId="+memberId);	
+		}
 	}
 			function deleteComment() {
 				let result = confirm("삭제 하시겠습니까?");
