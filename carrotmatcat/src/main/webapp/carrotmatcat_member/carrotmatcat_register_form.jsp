@@ -114,19 +114,19 @@ body {
 <img src="${pageContext.request.contextPath}/carrotmatcat_images/login.png" class="matcat">
  <div class="form">
 <form class="register-form" action="${pageContext.request.contextPath}/RegisterMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
-	<input id="memberId" type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
+	<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required">
 	<button type="button" onclick="checkMemberId()">아이디 중복확인</button><br><br>
 	<span id="checkMemberIdResult"></span><br><br>
 	
-	<input id="memberPassword" type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"><br>
+	<input type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"><br>
 	<input type="password" name="memberPassword" id="memberPasswordTwo" placeholder="패스워드" required="required" onkeyup="checkPassword()"><br><br>
 	<span id="checkMemberPasswordResult"></span><br><br>
 	
-	<input id="memberNickname" type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required">
+	<input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required">
 	<button type="button" onclick="checkMemberNickname()">닉네임 중복확인</button><br><br>
 	<span id="checkMemberNicknameResult"></span><br><br>
 	
-	<button type="submit">회원가입</button>
+	<button type="submit" onclick="trimCheck()">회원가입</button>
 </form>
 </div>
 <script type="text/javascript">
@@ -154,7 +154,7 @@ body {
      	let memberId=document.getElementById("memberId").value;
 		let checkMemberIdResult=document.getElementById("checkMemberIdResult");
 		if(memberId.length<4){
-			checkResultSpan.innerHTML="<font color=pink>아이디는 4자 이상</font>";
+			checkMemberIdResult.innerHTML="<font color=pink>아이디는 4자 이상</font>";
 		}else{
 			let xhr=new XMLHttpRequest();
 			xhr.onreadystatechange=function(){
@@ -202,14 +202,14 @@ body {
 	}
 	
 	function trimCheck() {
-		let memberId=document.getElementById("memberId").value;
-		let memberPassword=document.getElementById("memberPassword").value;
-		let memberNickname=document.getElementById("memberNickname").value;
-		if(password.trim()<1 || nickname.trim()<1){
+		let memberId_trim=document.getElementById("memberId").value;
+		let memberPassword__trim=document.getElementById("memberPasswordOne").value;
+		let memberNickname_trim=document.getElementById("memberNickname").value;
+		if(memberId_trim.trim()<1 || memberPassword__trim.trim()<1 || memberNickname_trim.trim()<1){
 			alert("공백 등록은 불가능합니다");
 			event.preventDefault();
 		} 
-	
+	}
 </script>
 </div>
 </body>

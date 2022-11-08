@@ -17,6 +17,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-에러페이지
+에러페이지 <a href="index.jsp">홈으로 가기</a>
 </body>
 </html>
