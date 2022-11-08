@@ -117,7 +117,7 @@ body {
       <input type="text" name="memberId" placeholder="아이디" required="required">
       <input type="password" name="memberPassword" placeholder="패스워드" required="required">
       <button>로그인</button>
-      <p class="message">아직 회원이 아니신가요? <a href="carrotmatcat_register_form.jsp">회원가입</a></p>
+      <p class="message">아직 회원이 아니신가요? <a href="carrotmatcat_member/carrotmatcat_register_form.jsp">회원가입</a></p>
     </form>
   </div>
 </div>

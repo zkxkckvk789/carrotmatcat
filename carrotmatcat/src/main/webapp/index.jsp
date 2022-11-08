@@ -30,18 +30,9 @@ background-color: #eb6421;
 </head>
 <body>
 	<div class="container">
-		<c:choose>
-			<c:when test="${sessionScope.memberVO==null}">
-				<a href="carrotmatcat_member/carrotmatcat_login_form.jsp"> 
-				<img src="carrotmatcat_images/indexVer2.png" class="matcat">
-				</a>
-			</c:when>
-			<c:otherwise>
 				<a href="${pageContext.request.contextPath}/HomeController.do"> 
 					<img src="carrotmatcat_images/indexVer2.png" class="matcat">
 				</a>
-			</c:otherwise>
-		</c:choose>
 	</div>
 </body>
 </html>
