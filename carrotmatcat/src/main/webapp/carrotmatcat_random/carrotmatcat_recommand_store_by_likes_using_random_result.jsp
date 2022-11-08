@@ -7,7 +7,7 @@
 <img src="carrotmatcat_images/randomResult.png" style="width:200%;"><br><br>
 <h3 style="text-align: center; color:white; margin-left:20%; padding-left:50%">" ${articleStoreName} "</h3><br><br><br>
 	<c:if test="${sessionScope.memberVO!=null}">
-		<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${requestScope.articleNo}" style=" font-size:1.2rem; display: block; margin-left: 45vw; width: 50%;">게시글 보러가기</a>
+		<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${requestScope.articleNo}" style="text-decoration:none; font-size:1.2rem; display: block; margin-left: 45vw; width: 50%;">게시글 보러가기</a>
 	</c:if>
 	<br><br><br><br>
 </div>

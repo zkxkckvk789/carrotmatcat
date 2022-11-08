@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="carrotmatcat.jpg" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="carrotmacat_images/carrotmatcat_logo.png" type="image/x-icon" sizes="16x16">
 <meta charset="UTF-8">
 <title>당근맛캣 Carrot Mat Cat</title>
 

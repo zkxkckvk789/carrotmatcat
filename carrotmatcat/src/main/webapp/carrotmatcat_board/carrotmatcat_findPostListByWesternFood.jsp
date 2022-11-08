@@ -40,7 +40,7 @@
 				<td>
 					<c:choose>	
 						<c:when test="${sessionScope.memberVO!=null}">
-							<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${post.articleNo}">${post.articleTitle}</a>
+							<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${post.articleNo}" style="text-decoration:none;">${post.articleTitle}</a>
 						</c:when>  
 						<c:otherwise>
 							<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${post.articleTitle}</a>

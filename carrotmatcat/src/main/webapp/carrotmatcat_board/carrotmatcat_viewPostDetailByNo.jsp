@@ -34,9 +34,9 @@ ul{
 	function callback(){
 		if(xhr.readyState==4 && xhr.status==200){
 			if(likeFlag==false){
-				document.getElementById("likeView").innerHTML="<input type='image' id='yes' src='carrotmatcat_images/yes.png' onclick='like(true)'>";
+				document.getElementById("likeView").innerHTML="<input type='image' id='yes' src='carrotmatcat_images/yes.png' onclick='like(true)' style='width:30px;'>";
 			}else{
-				document.getElementById("likeView").innerHTML="<input type='image' id='no' src='carrotmatcat_images/no.png' onclick='like(false)'>";
+				document.getElementById("likeView").innerHTML="<input type='image' id='no' src='carrotmatcat_images/no.png' onclick='like(false)' style='width:30px;'>";
 			}
 			document.getElementById("like_result").innerHTML=xhr.responseText;
 			
@@ -68,7 +68,7 @@ ul{
 							<input type="image" id="no" src="carrotmatcat_images/no.png" onclick="like(false)" style="width:30px;">
 						</c:when>
 						<c:otherwise>
-							<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)">
+							<input type="image" id="yes" src="carrotmatcat_images/yes.png" onclick="like(true)" style="width:30px;">
 						</c:otherwise>
 					</c:choose>
 					</span>
@@ -151,6 +151,18 @@ ul{
 												</form>
 														${clist.commentContent}<br>
 													<button type="button" onclick="updateComment()" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
+														<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Toggle bottom offcanvas</button>
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+    ...
+  </div>
+</div>
+													
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
 										</c:when>
 										<c:otherwise>
