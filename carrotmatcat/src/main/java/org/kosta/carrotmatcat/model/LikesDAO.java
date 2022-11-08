@@ -92,8 +92,6 @@ public class LikesDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(memberId);
-		System.out.println(articleNo);
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
