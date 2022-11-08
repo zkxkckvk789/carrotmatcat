@@ -152,14 +152,12 @@ ul{
 														${clist.commentContent}<br>
 													<button type="button" onclick="updateCommentForm(${clist.commentNo})" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
-											
 														<div id="commentUpdateZone${clist.commentNo}" style="display: none;">
 															<input type="hidden" id="comment_No${clist.commentNo}" value="${clist.commentNo}">
-															<textarea class="" id="comment_update_content${clist.commentNo}" rows="3" placeholder="${clist.commentContent}" style="width:60vw"></textarea><br>
+															<textarea class="" id="comment_update_content${clist.commentNo}" rows="3" style="width:60vw">${clist.commentContent}</textarea><br>
 															<button name="commentupdatebtn" id="commentupdatebtn" class="btn btn-warning" onclick="updateComment(${clist.commentNo})" style=" color: white; margin-left:52vw; background-color: #ef7b35; border-color: #ef7b35; ">수정</button>
 															<button name="commentupdatebtn_no" id="commentupdatebtn_no" class="btn btn-warning" onclick="commentUpdateZoneHide(${clist.commentNo})" style=" color: white; background-color: #ef7b35; border-color: #ef7b35;">취소</button>
 														</div>
-													
 										</c:when>
 										<c:otherwise>
 											${clist.commentContent}
@@ -195,11 +193,9 @@ function updateComment(commentNum) {
 	if (result) {
 		let commentNo = document.getElementById("comment_No"+commentNum).value;
 		let commentContent = document.getElementById("comment_update_content"+commentNum).value;
-		alert(commentNo);
-		alert(commentContent);
 		console.log(commentNo,commentContent);
 		let xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때
+		xhr.onreadystatechange = function() { //->  xhr의 변경을 감지할 때	
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				if(xhr.responseText=="ok"){
 					document.getElementById("commentUpdateZone"+commentNo).style.display="none";
