@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당근맛캣 Carrot Mat Cat</title>
-<link rel="icon" href="carrotmatcat.jpg" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="carrotmatcat_images/carrotmatat_logo.png" type="image/x-icon" sizes="16x16">
  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="carrotmatat_images/carrotmatat_logo.png" />

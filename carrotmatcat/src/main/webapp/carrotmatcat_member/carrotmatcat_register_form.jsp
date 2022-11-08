@@ -127,7 +127,7 @@ body {
 	<span id="checkMemberNicknameResult"></span><br><br>
 	
 	<button type="submit" onclick="trimCheck()">회원가입</button>
-	<p class="message">이미 회원신가요? <a href="carrotmatcat_member/carrotmatcat_login_form.jsp">로그인하러가기!</a></p>
+	<p class="message">이미 회원신가요? <a href="${pageContext.request.contextPath}/carrotmatcat_member/carrotmatcat_login_form.jsp">로그인하러가기!</a></p>
 </form>
 </div>
 <script type="text/javascript">
