@@ -40,7 +40,7 @@
 				<td>
 					<c:choose>	
 						<c:when test="${sessionScope.memberVO!=null}">
-							<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${post.articleNo}">${post.articleTitle}</a>
+							<a href="${pageContext.request.contextPath}/ViewPostDetailByNoController.do?articleNo=${post.articleNo}" style="text-decoration:none;">${post.articleTitle}</a>
 						</c:when>  
 						<c:otherwise>
 							<a href="carrotmatcat_member/carrotmatcat_login_form.jsp">${post.articleTitle}</a>
@@ -58,7 +58,7 @@
 </div>
 <c:if test="${sessionScope.memberVO!=null}">
 <span class="write">
-	<a href="${pageContext.request.contextPath}/WritePostFormController.do">글쓰기</a>
+	<a href="${pageContext.request.contextPath}/WritePostFormController.do" style="background-color: white; color: orange; padding:5px; text-decoration: none;">글쓰기</a>
 </span>
 <br>
 </c:if>

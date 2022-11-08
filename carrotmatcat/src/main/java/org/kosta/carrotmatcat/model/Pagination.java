@@ -2,7 +2,7 @@ package org.kosta.carrotmatcat.model;
 
 public class Pagination {
 	private int nowPage=1; //현재 페이지
-	private int postCountPerPage=5; //페이지당 게시물수 
+	private int postCountPerPage=15; //페이지당 게시물수 
 	private int pageCountPerPageGroup=4; //페이지 그룹당 페이지수 
 	private int totalPostCount; //총게시물수 ( 데이터베이스에 저장되어 있는)
 	
