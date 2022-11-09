@@ -40,7 +40,6 @@ public class ViewPostDetailByNoController implements Controller{
 		PostVO postVO= LikesDAO.getInstance().check(memberVO.getMemberId(),articleNo);
 		
 		request.setAttribute("postVO", postVO);
-		
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("postDetailView", BoardDAO.getInstance().viewPostDetailByNo(articleNo));
 		request.setAttribute("articleLikesCount", articleLikesCount);
