@@ -149,6 +149,7 @@ ul{
 													<input type="hidden" name="commentNo" value="${clist.commentNo}">
 												</form>
 														${clist.commentContent}<br>
+														<span class="comment_info_date">${clist.commentTimePosted }</span>
 													<button type="button" onclick="updateCommentForm(${clist.commentNo})" style="color: gray; background-color: white; border: 1px solid white; border-radius: 20px;">댓글 수정</button>
 													<button type="button" onclick="deleteComment()" style="color: gray; background-color: white; border: 2px solid white; border-radius: 20px;">댓글 삭제</button>
 														<div id="commentUpdateZone${clist.commentNo}" style="display: none;">
