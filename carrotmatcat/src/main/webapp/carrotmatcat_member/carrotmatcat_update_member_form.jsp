@@ -119,10 +119,10 @@ body {
 <div class="form">
 <form action="UpdateMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
 			<input type="text" name="memberId" required="required"  value="${sessionScope.memberVO.memberId}"  readonly="readonly"	><br>
-			<input id="password" type="password" name="memberPassword" id="memberPasswordOne" required="required" placeholder = "패스워드"><br>
+			<input type="password" name="memberPassword" id="memberPasswordOne" required="required" placeholder = "패스워드"><br>
 			<input type="password" name="memberPassword" id="memberPasswordTwo" required="required" placeholder = "패스워드" onkeyup="checkPassword()"><br>
 			<span id="checkMemberPasswordResult"></span>
-			<input id="nickname" type="text" name="memberNickname"  id="memberNickname" required="required"  value="${sessionScope.memberVO.memberNickname}"><br>
+			<input type="text" name="memberNickname"  id="memberNickname" required="required"  value="${sessionScope.memberVO.memberNickname}"><br>
 			<button type="button" onclick="checkMemberNickname()">닉네임 중복확인</button>
 			<span id="checkMemberNicknameResult"></span>
 			<br><br><br>
@@ -183,8 +183,8 @@ function goback(){
 }
 
 function trimCheck() {
-	let password=document.getElementById("password").value;
-	let nickname=document.getElementById("nickname").value;
+	let password=document.getElementById("memberPasswordOne").value;
+	let nickname=document.getElementById("memberNickname").value;
 	if(password.trim()<1 || nickname.trim()<1){
 		alert("공백 등록은 불가능합니다");
 		event.preventDefault();

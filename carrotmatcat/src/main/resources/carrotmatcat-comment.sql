@@ -35,7 +35,7 @@ INNER JOIN carrotmatcat_board cb ON cb.article_no = cc.article_no
 WHERE cc.article_no='1';
 
 --댓글 삭제
-DELETE FROM carrotmatcat_comment WHERE comment_no=?
+DELETE FROM carrotmatcat_comment;
 
 -- 댓글 수정
 UPDATE carrotmatcat_comment SET comment_content='공감하지않습니다' WHERE comment_no=1;
