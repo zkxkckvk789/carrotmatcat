@@ -169,15 +169,15 @@ ul{
 															<button name="commentupdatebtn" id="commentupdatebtn" class="btn btn-warning" onclick="updateComment(${clist.commentNo})" style=" color: white; margin-left:52vw; background-color: #ef7b35; border-color: #ef7b35; ">수정</button>
 															<button name="commentupdatebtn_no" id="commentupdatebtn_no" class="btn btn-warning" onclick="commentUpdateZoneHide(${clist.commentNo})" style=" color: white; background-color: #ef7b35; border-color: #ef7b35;">취소</button>
 														</div>
-															<hr align="center" style="border: solid 1px gray; width: 50%;">
+															<%--<hr align="center" style="border: solid 1px gray; width: 50%;"> --%>
 										</c:when>
 										<c:otherwise>
 											${clist.commentContent}
                                     			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
-                                    			<hr align="center" style="border: solid 1px gray; width: 80vw;">
+                                    			<%--<hr align="center" style="border: solid 1px gray; width: 80vw;"> --%>
                                    	 	</c:otherwise>
                                     	</c:choose>
-                                    		</div>
+                                    		<hr style="width:1000px"></div>
                                 		</div>
                                	</c:forEach>
                                	<hr>
