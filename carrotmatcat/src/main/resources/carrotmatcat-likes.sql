@@ -1,15 +1,17 @@
 CREATE TABLE carrotmatcat_likes(
 	article_no NUMBER NOT NULL,
 	member_id VARCHAR2(100) NOT NULL,
-	CONSTRAINT likes_article_no_fk FOREIGN KEY (article_no) REFERENCES carrotmatcat_board(article_no),
-    CONSTRAINT likes_member_id_fk FOREIGN KEY (member_id) REFERENCES carrotmatcat_member(member_id),
+	CONSTRAINT likes_article_no_fk FOREIGN KEY (article_no) REFERENCES carrotmatcat_board(article_no) ON DELETE CASCADE,
+    CONSTRAINT likes_member_id_fk FOREIGN KEY (member_id) REFERENCES carrotmatcat_member(member_id) ON DELETE CASCADE,
     CONSTRAINT carrotmatcat_likes_pk PRIMARY KEY (article_no, member_id)
 )
 
+DROP TABLE carrotmatcat_likes;
+
 -- 좋아요 추가
-INSERT INTO carrotmatcat_likes VALUES(110, 'yerin0110');
+INSERT INTO carrotmatcat_likes VALUES(101, 'yerin0110');
 INSERT INTO carrotmatcat_likes VALUES(6, 'yerin0110');
-INSERT INTO carrotmatcat_likes VALUES(9, 'yerin0110');
+INSERT INTO carrotmatcat_likes VALUES(200, 'yerin0110');
 
 
 -- 좋아요 삭제
