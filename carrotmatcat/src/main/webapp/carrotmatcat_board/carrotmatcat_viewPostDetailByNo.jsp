@@ -15,16 +15,16 @@ ul{
  	padding-left: 30px;
  }
 .container{
-	padding-left:80px;
-	padding-right:80px;
+	padding-left:100px;
+	padding-right:100px;
 }	
-.preTag{
+/* .preTag{
 	-ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     width: 80vw; 
     overflow:scroll; 
     white-space: pre-wrap;
-}
+} */
 
 .preTag::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -54,11 +54,11 @@ ul{
 		}//if
 	}//callback
 </script>
-	<div class="container pt-3">
+	<div class="container pt-3" style="">
 			<form>
 				<input type="hidden" id="articleNo" name="articleNo" value="${postDetailView.articleNo}">
 			</form>
-		<table class="table table " style="border-collapse:collapse; border-radius:8px;">
+		<table class="table table " style="border-collapse:collapse; border-radius:8px; ">
 		<thead>
 		<tr style="text-align: left; color: white; border-bottom:dashed;  font-size: 2em; ">
 			<th class="no">${postDetailView.articleFoodCategory}</th>
@@ -97,7 +97,7 @@ ul{
 		<tbody>
 			<tr style="background-color: white">
 				<td colspan="6" style="height: 30vh;">
-					<pre class="preTag"><font size="4">${postDetailView.articleContent}</font></pre>
+					<pre class="preTag" style="white-space: pre-wrap; "><font size="4">${postDetailView.articleContent}</font></pre>
 				</td>
 			</tr>
 			<c:if test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
