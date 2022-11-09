@@ -174,7 +174,6 @@ ul{
 										<c:otherwise>
 											${clist.commentContent}
                                     			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
-                                    			<%--<hr align="center" style="border: solid 1px gray; width: 80vw;"> --%>
                                    	 	</c:otherwise>
                                     	</c:choose>
                                     		<hr style="width:1000px"></div>
