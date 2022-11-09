@@ -17,6 +17,17 @@ ul{
 .container{
 	padding-left:80px;
 	padding-right:80px;
+}	
+.preTag{
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    width: 80vw; 
+    overflow:scroll; 
+    white-space: pre-wrap;
+}
+
+.preTag::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 </style>
 <script>
@@ -47,7 +58,7 @@ ul{
 			<form>
 				<input type="hidden" id="articleNo" name="articleNo" value="${postDetailView.articleNo}">
 			</form>
-		<table class="table table " style="border-collapse; border-radius:8px;" >
+		<table class="table table " style="border-collapse:collapse; border-radius:8px;">
 		<thead>
 		<tr style="text-align: left; color: white; border-bottom:dashed;  font-size: 2em; ">
 			<th class="no">${postDetailView.articleFoodCategory}</th>
@@ -86,7 +97,7 @@ ul{
 		<tbody>
 			<tr style="background-color: white">
 				<td colspan="6" style="height: 30vh;">
-					<pre style=" width: 80vw; overflow:scroll; white-space: pre-wrap;"><font size="4">${postDetailView.articleContent}</font></pre>
+					<pre class="preTag"><font size="4">${postDetailView.articleContent}</font></pre>
 				</td>
 			</tr>
 			<c:if test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
@@ -128,7 +139,7 @@ ul{
 			</tbody>
 		</table>
 	<div class="comment_option">
-		<h3 class="comment_title" style="color:white;">댓글</h3>
+		<h3 class="comment_title" style=" width:80vw; color:white;">댓글</h3>
 	</div>
 	 <section class="mb-5">
                         <div class="card bg-light">
@@ -163,7 +174,7 @@ ul{
 										<c:otherwise>
 											${clist.commentContent}
                                     			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
-                                    			<hr align="center" style="border: solid 1px gray; width: 50%;">
+                                    			<hr align="center" style="border: solid 1px gray; width: 80vw;">
                                    	 	</c:otherwise>
                                     	</c:choose>
                                     		</div>
