@@ -18,7 +18,7 @@
 			<td><input type="text" id="name" name="articleStoreName" placeholder="맛집 이름 (상호명)" required="required" style="border:none; background-color: #FFFFFF; border-radius: 3px"></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="title" name="articleTitle" placeholder="제목" required="required" pattern="\d*" maxlength="20" style="border:none; background-color: #FFFFFF; border-radius: 3px;" ></td>
+			<td><input type="text" id="title" name="articleTitle" placeholder="제목" required="required" maxlength="20" style="border:none; background-color: #FFFFFF; border-radius: 3px;" ></td>
 		</tr>
 		<tr>
 			<td><textarea rows="10" id="content" class="form-control" name="articleContent" placeholder="맛집을 소개해주세요" required="required" style="border:none"></textarea></td>
