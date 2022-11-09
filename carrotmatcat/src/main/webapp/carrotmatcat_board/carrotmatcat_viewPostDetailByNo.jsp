@@ -86,7 +86,7 @@ ul{
 		<tbody>
 			<tr style="background-color: white">
 				<td colspan="6" style="height: 30vh;">
-					<font size="4"><pre>${postDetailView.articleContent}</pre></font>
+					<pre style=" width: 80vw; overflow:scroll; white-space: pre-wrap;"><font size="4">${postDetailView.articleContent}</font></pre>
 				</td>
 			</tr>
 			<c:if test="${postDetailView.memberVO.getMemberNickname()==memberVO.getMemberNickname()}">
