@@ -176,8 +176,8 @@ ul{
                                     			<br><span class="comment_info_date">${clist.commentTimePosted }</span>
                                    	 	</c:otherwise>
                                     	</c:choose>
-                                    		<hr style="width:1000px"></div>
-                                		</div>
+                                    		<hr style="width:65vw"></div>
+                                		</div>   
                                	</c:forEach>
                                	<hr>
                                	 <!-- Comment form-->

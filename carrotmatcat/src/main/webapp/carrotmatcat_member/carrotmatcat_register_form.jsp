@@ -114,15 +114,15 @@ body {
 <img src="${pageContext.request.contextPath}/carrotmatcat_images/login.png" class="matcat">
  <div class="form">
 <form class="register-form" action="${pageContext.request.contextPath}/RegisterMemberController.do" method="post" onsubmit="checkRegisterForm(event)">
-	<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required" pattern="\d*" maxlength="20">
+	<input type="text" name="memberId" id="memberId" placeholder="아이디" required="required"  maxlength="20">
 	<button type="button" onclick="checkMemberId()">아이디 중복확인</button><br><br>
 	<span id="checkMemberIdResult"></span><br><br>
 	
-	<input type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"  pattern="\d*" maxlength="60"><br>
+	<input type="password" name="memberPassword" id="memberPasswordOne" placeholder="패스워드" required="required"  maxlength="60"><br>
 	<input type="password" name="memberPassword" id="memberPasswordTwo" placeholder="패스워드" required="required" onkeyup="checkPassword()"><br><br>
 	<span id="checkMemberPasswordResult"></span><br><br>
 	
-	<input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required" pattern="\d*" maxlength="20">
+	<input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required="required"  maxlength="20">
 	<button type="button" onclick="checkMemberNickname()">닉네임 중복확인</button><br><br>
 	<span id="checkMemberNicknameResult"></span><br><br>
 	
